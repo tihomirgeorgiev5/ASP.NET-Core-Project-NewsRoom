@@ -20,7 +20,7 @@ namespace NewsRoom
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddDbContext<ApplicationDbContext>(options =>
+                .AddDbContext<NewsRoomDbContext>(options =>
                 options
                 .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services
@@ -34,7 +34,7 @@ namespace NewsRoom
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireUppercase = false;
                 })
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<NewsRoomDbContext>();
             services
                 .AddControllersWithViews();
         }

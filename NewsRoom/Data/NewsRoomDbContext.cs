@@ -6,10 +6,14 @@ namespace NewsRoom.Data
 {
     public class NewsRoomDbContext : IdentityDbContext
     {
-        public DbSet<ANews> News { get; init; }
+       
         public NewsRoomDbContext(DbContextOptions<NewsRoomDbContext> options)
             : base(options)
         {
         }
+
+        public DbSet<ANews> News { get; init; }
+
+        public DbSet<Category> Categories { get; init; }
     }
 }

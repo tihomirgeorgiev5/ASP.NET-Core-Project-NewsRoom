@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NewsRoom.Data;
+using NewsRoom.Infrastructure;
 
 namespace NewsRoom
 {
@@ -39,9 +40,11 @@ namespace NewsRoom
                 .AddControllersWithViews();
         }
 
-        
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.PrepareDatabase();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -59,10 +62,12 @@ namespace NewsRoom
                 .UseAuthentication()
                 .UseAuthorization()
                 .UseEndpoints(endpoints =>
-            {
-               endpoints.MapDefaultControllerRoute();
-               endpoints.MapRazorPages();
-            });
+                {
+                    endpoints.MapDefaultControllerRoute();
+                    endpoints.MapRazorPages();
+                });
+
+            app.ApplicationServices.GetService<NewsRoomDbContext>().Database.Migrate();
         }
     }
 }

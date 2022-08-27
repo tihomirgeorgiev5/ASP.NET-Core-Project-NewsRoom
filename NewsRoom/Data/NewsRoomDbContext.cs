@@ -15,5 +15,17 @@ namespace NewsRoom.Data
         public DbSet<ANews> News { get; init; }
 
         public DbSet<Category> Categories { get; init; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder
+                .Entity<ANews>()
+                .HasOne(n => n.Category)
+                .WithMany(n => n.News)
+                .HasForeignKey(n => n.CategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            base.OnModelCreating(builder);
+        }
     }
 }

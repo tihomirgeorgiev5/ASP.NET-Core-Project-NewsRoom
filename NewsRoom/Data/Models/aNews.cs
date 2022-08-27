@@ -17,7 +17,7 @@ namespace NewsRoom.Data.Models
         public string Title { get; set; }
 
         [Required]
-        [MaxLength(NewsDescriptionMaxLength)]
+        
         public string Description { get; set; }
 
         [Required]

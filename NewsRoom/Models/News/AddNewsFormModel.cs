@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace NewsRoom.Models.News
 {
@@ -11,6 +12,7 @@ namespace NewsRoom.Models.News
 
         public string Description { get; init; }
 
+        [Display(Name = "Image URL")]
         public string ImageUrl { get; init; }
 
         public DateTime Date { get; init; }

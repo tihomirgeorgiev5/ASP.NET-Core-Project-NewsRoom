@@ -20,6 +20,7 @@ namespace NewsRoom
 
         public void ConfigureServices(IServiceCollection services)
         {
+
             services
                 .AddDbContext<NewsRoomDbContext>(options =>
                 options
@@ -43,6 +44,7 @@ namespace NewsRoom
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+           
             app.PrepareDatabase();
 
             if (env.IsDevelopment())
@@ -67,7 +69,8 @@ namespace NewsRoom
                     endpoints.MapRazorPages();
                 });
 
-            app.ApplicationServices.GetService<NewsRoomDbContext>().Database.Migrate();
+            //app.ApplicationServices.GetService<NewsRoomDbContext>().Database.Migrate();
+
         }
     }
 }

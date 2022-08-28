@@ -69,7 +69,7 @@ namespace NewsRoom
                     endpoints.MapRazorPages();
                 });
 
-            //app.ApplicationServices.GetService<NewsRoomDbContext>().Database.Migrate();
+          
 
         }
     }

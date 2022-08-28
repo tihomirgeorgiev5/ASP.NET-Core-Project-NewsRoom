@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace NewsRoom.Models.News
@@ -17,6 +18,9 @@ namespace NewsRoom.Models.News
 
         public DateTime Date { get; init; }
 
+        [Display(Name = "Category")]
         public int CategoryId { get; init; }
-    }
+
+        public IEnumerable<NewsCategoryViewModel> Categories { get; set; }
+    } 
 }

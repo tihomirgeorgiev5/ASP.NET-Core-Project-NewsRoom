@@ -1,7 +1,29 @@
-﻿<form>
+﻿@model AddNewsFormModel 
+
+@{ 
+    ViewData["Title"] = "Add News";
+}
+
+<form method="post">
     <div class="form-group">
-        <label for="exampleFormControlInput1">Email address</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+        <label asp-for="Area"></label>
+        <input asp-for="Area" class="form-control" placeholder="Туризъм, Политика, Икономика и др...">
+    </div>
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" placeholder=""Ориент Експрес" пристига във Варна...">
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control" placeholder="Часът, в който ще пристигне влака е ..."></textarea>
+    </div>
+    <div class="form-group">
+        <label asp-for="ImageUrl"></label>
+        <input asp-for="ImageUrl" class="form-control" placeholder="Твоята снимка качи тук...">
+    </div>
+    <div class="form-group">
+        <label asp-for="Date"></label>
+        <input asp-for="Date" class="form-control" placeholder="@DateTime.UtcNow.Year">
     </div>
     <div class="form-group">
         <label for="exampleFormControlSelect1">Example select</label>

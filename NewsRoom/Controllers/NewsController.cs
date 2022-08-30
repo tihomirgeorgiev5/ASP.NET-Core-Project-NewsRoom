@@ -17,10 +17,14 @@ namespace NewsRoom.Controllers
         });
 
         [HttpPost]
-
         public IActionResult Add (AddNewsFormModel aNews)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                aNews.Categories = this.GetNewsCategories();
+                return View(aNews);
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         private IEnumerable<NewsCategoryViewModel> GetNewsCategories() =>

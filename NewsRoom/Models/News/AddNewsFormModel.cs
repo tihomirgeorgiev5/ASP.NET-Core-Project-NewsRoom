@@ -27,7 +27,7 @@ namespace NewsRoom.Models.News
         [Url]
         public string ImageUrl { get; init; }
 
-        [MaxLength(NewsDateMaxLength)]
+        
         public DateTime Date { get; init; }
 
         [Display(Name = "Category")]

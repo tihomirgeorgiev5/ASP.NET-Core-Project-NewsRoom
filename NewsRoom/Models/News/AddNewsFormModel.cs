@@ -8,18 +8,19 @@ namespace NewsRoom.Models.News
     public class AddNewsFormModel
     {
         [Required]
-        [MaxLength(NewsAreaMaxLength)]
-        [MinLength(NewsAreaMinLength)]
+        [StringLength(NewsAreaMaxLength, MinimumLength = NewsAreaMinLength)]
 
         public string Area { get; init; }
 
         [Required]
-        [MaxLength(NewsTitleMaxLength)]
-        [MinLength(NewsTitleMinLength)]
+        [StringLength(NewsTitleMaxLength, MinimumLength = NewsTitleMinLength)]
         public string Title { get; init; }
 
         [Required]
-        [MinLength(NewsDescriptionMinLength)]
+        [StringLength(
+            int.MaxValue,
+            MinimumLength = NewsDescriptionMinLength,
+            ErrorMessage = "The field Description must be a text with a minimum length of {2}.")]
         public string Description { get; init; }
 
         [Display(Name = "Image URL")]
@@ -27,7 +28,7 @@ namespace NewsRoom.Models.News
         [Url]
         public string ImageUrl { get; init; }
 
-        
+      
         public DateTime Date { get; init; }
 
         [Display(Name = "Category")]

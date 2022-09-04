@@ -16,18 +16,22 @@
             <div class="form-group">
                 <label asp-for="Title"></label>
                 <input asp-for="Title" class="form-control" placeholder="'Ориент Експрес' пристига във Варна...">
+                <span asp-validation-for="Title" class="small text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Description"></label>
                 <textarea asp-for="Description" rows="4" class="form-control" placeholder="Часът, в който ще пристигне влака е ..."></textarea>
+                <span asp-validation-for="Description" class="small text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ImageUrl"></label>
                 <input asp-for="ImageUrl" class="form-control" placeholder="Твоята снимка качи тук...">
+                <span asp-validation-for="ImageUrl" class="small text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Date"></label>
                 <input asp-for="Date" class="form-control" placeholder="@DateTime.UtcNow.Year">
+                <span asp-validation-for="Date" class="small text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CategoryId"></label>

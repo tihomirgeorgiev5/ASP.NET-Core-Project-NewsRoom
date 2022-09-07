@@ -17,6 +17,26 @@ namespace NewsRoom.Controllers
             Categories = this.GetNewsCategories()
         });
 
+        public IActionResult All()
+        {
+            var news = this.data
+                .News
+                .OrderByDescending(n => n.Id)
+                .Select(n => new NewsListingViewModel
+                {
+                    Id = n.Id,
+                    Area = n.Area,
+                    Title = n.Title,
+                    ImageUrl = n.ImageUrl,
+                    Date = n.Date,
+                    Category = n.Category.Name
+                })
+                .ToList();
+
+            return View(news);
+
+        }
+
         [HttpPost]
         public IActionResult Add (AddNewsFormModel aNews)
         {

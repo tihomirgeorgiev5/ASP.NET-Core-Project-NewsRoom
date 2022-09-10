@@ -5,7 +5,7 @@
         public const int NewsAreaMaxLength = 30;
         public const int NewsAreaMinLength = 2;
 
-        public const int NewsTitleMaxLength = 50; 
+        public const int NewsTitleMaxLength = 100; 
         public const int NewsTitleMinLength = 5; 
 
         public const int NewsDescriptionMaxLength = 10000;

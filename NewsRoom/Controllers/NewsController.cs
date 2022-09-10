@@ -63,7 +63,7 @@ namespace NewsRoom.Controllers
             this.data.News.Add(aNewsData);
             this.data.SaveChanges();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(nameof(All));
         }
 
         private IEnumerable<NewsCategoryViewModel> GetNewsCategories() =>

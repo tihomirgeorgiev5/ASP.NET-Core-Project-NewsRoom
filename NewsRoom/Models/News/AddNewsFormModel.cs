@@ -1,5 +1,4 @@
-﻿using NewsRoom.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using static NewsRoom.Data.DataConstants;
@@ -29,7 +28,7 @@ namespace NewsRoom.Models.News
         [Url]
         public string ImageUrl { get; init; }
 
-        [DateValidator("01-01-2000")]
+        //[DateValidator("01-01-2000")]
         public DateTime Date { get; init; }
 
         [Display(Name = "Category")]

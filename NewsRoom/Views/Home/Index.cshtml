@@ -1,18 +1,20 @@
-﻿@model List<NewsListingViewModel>
+﻿@model IndexViewModel
 @{
     ViewData["Title"] = "Welcome!";
 }
 
 @{
-    var firstNews = Model.Any() ? Model[0] : null;
+    var news = Model.News;
 
-    var secondNews = Model.Count > 1 ? Model[1] : null;
+    var firstNews = news.Any() ? news[0] : null;
 
-    var thirdNews = Model.Count > 2 ? Model[2] : null;
+    var secondNews = news.Count > 1 ? news[1] : null;
+
+    var thirdNews = news.Count > 2 ? news[2] : null;
 
 }
 
-@if (!Model.Any())
+@if (!news.Any())
 {
     <div class="jumbotron">
         <h1 class="display-4">Welcome to the newest News!</h1>
@@ -25,7 +27,7 @@
 
 }
 
-
+<div class="mb-5"></div>
 
 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
@@ -68,4 +70,20 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
+</div>
+
+<div class="mb-5"></div>
+
+<div class="jumbotron">
+    <div class="row">
+        <h2 class="col-md-4 text-center">
+            @Model.TotalNews News
+        </h2>
+        <h2 class="col-md-4 text-center">
+            @Model.TotalReaders Readers
+        </h2>
+        <h2 class="col-md-4 text-center">
+            @Model.TotalWriters Writers
+        </h2>
+    </div>
 </div>

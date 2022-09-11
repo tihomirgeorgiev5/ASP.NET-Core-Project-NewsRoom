@@ -14,6 +14,8 @@ namespace NewsRoom.Controllers
         public HomeController(NewsRoomDbContext data) => this.data = data;
         public IActionResult Index()
         {
+            var totalNews = this.data.News.Count();
+
             var news = this.data
                .News
                .OrderByDescending(n => n.Id)
@@ -28,7 +30,11 @@ namespace NewsRoom.Controllers
                .Take(3)
                .ToList();
 
-            return View(news);
+            return View(new IndexViewModel 
+            { 
+                TotalNews = totalNews,
+                News = news,
+            });
         }
         
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

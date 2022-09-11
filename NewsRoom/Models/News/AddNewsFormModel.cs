@@ -13,7 +13,10 @@ namespace NewsRoom.Models.News
         public string Area { get; init; }
 
         [Required]
-        [StringLength(NewsTitleMaxLength, MinimumLength = NewsTitleMinLength)]
+        [StringLength(
+            int.MaxValue,
+            MinimumLength = NewsTitleMinLength,
+            ErrorMessage = "Sorry characters allowed for Title are too long")]
         public string Title { get; init; }
 
         [Required]

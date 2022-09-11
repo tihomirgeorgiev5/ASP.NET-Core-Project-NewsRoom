@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NewsRoom.Data;
 using NewsRoom.Models;
-using NewsRoom.Models.News;
+using NewsRoom.Models.Home;
 using System.Diagnostics;
 using System.Linq;
 
@@ -17,14 +17,13 @@ namespace NewsRoom.Controllers
             var news = this.data
                .News
                .OrderByDescending(n => n.Id)
-               .Select(n => new NewsListingViewModel
+               .Select(n => new NewsIndexViewModel
                {
                    Id = n.Id,
                    Area = n.Area,
                    Title = n.Title,
                    ImageUrl = n.ImageUrl,
-                   Date = n.Date,
-                   Category = n.Category.Name
+                   Date = n.Date,  
                })
                .Take(3)
                .ToList();

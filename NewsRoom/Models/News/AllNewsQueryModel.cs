@@ -5,6 +5,7 @@ namespace NewsRoom.Models.News
 {
     public class AllNewsQueryModel
     {
+        public string Area { get; init; }
         public IEnumerable<string> Areas { get; init; }
 
         [Display(Name = "Search by text:")]

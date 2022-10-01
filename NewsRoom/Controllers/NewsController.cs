@@ -18,9 +18,14 @@ namespace NewsRoom.Controllers
             Categories = this.GetNewsCategories()
         });
 
-        public IActionResult All(string searchTerm)
+        public IActionResult All(string area,string searchTerm)
         {
             var newsQuery = this.data.News.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(area))
+            {
+                newsQuery = newsQuery.Where(n => n.Area == area);
+            }
 
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
@@ -42,8 +47,16 @@ namespace NewsRoom.Controllers
                 })
                 .ToList();
 
+            var newsAreas = this.data
+                .News
+                .Select(n => n.Area)
+                .Distinct()
+                .OrderBy(a => a)
+                .ToList();
+
             return View(new AllNewsQueryModel
             {
+                Areas = newsAreas,
                 News = news,
                 SearchTerm = searchTerm
             });

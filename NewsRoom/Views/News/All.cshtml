@@ -3,6 +3,18 @@
 <form method="get">
     <div class="row mb-5">
         <div class="form-group col-md-4">
+            <label asp-for="Area"></label>
+            <select asp-for="Area" class="form-control">
+                <option value="">All</option>
+
+                @foreach (var area in Model.Areas)
+                {
+                    <option value="@area">@area</option>
+
+                })
+            </select>
+        </div>
+        <div class="form-group col-md-4">
             <label asp-for="SearchTerm"></label>
             <input asp-for="SearchTerm" class="form-control" placeholder="Днес във Варна пристига...">
         </div>

@@ -33,7 +33,10 @@ namespace NewsRoom.Controllers
                 })
                 .ToList();
 
-            return View(news);
+            return View(new AllNewsQueryModel
+            {
+                News = news
+            });
 
         }
 

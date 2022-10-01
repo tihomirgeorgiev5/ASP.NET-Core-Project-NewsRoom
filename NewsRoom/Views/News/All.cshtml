@@ -1,8 +1,19 @@
-﻿@model IEnumerable<NewsListingViewModel>
+﻿@model AllNewsQueryModel
+
+<div>
+    <form method="get">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label asp-for="SearchTerm"></label>
+                <input asp-for="SearchTerm" class="form-control" placeholder="Политика, Икономика, Туризъм и др...">
+            </div>
+        </div>
+    </form>
+</div>
 
 <div class="row">
     @{
-        foreach (var aNews in Model)
+        foreach (var aNews in Model.News)
         {
         <div class="col-md-4">
             <div class="card mb-3">

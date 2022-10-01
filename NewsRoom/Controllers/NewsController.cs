@@ -18,7 +18,10 @@ namespace NewsRoom.Controllers
             Categories = this.GetNewsCategories()
         });
 
-        public IActionResult All(string area,string searchTerm)
+        public IActionResult All(
+            string area,
+            string searchTerm,
+            NewsSorting sorting)
         {
             var newsQuery = this.data.News.AsQueryable();
 
@@ -34,8 +37,16 @@ namespace NewsRoom.Controllers
                 n.Title.ToLower().Contains(searchTerm.ToLower()) ||
                 n.Description.ToLower().Contains(searchTerm.ToLower()));
             }
+
+            newsQuery = sorting switch
+            {
+                NewsSorting.DateCreated => newsQuery.OrderByDescending(n => n.Id),
+                NewsSorting.AreaAndTitle => newsQuery.OrderBy(n => n.Area).ThenBy(n => n.Title),
+                NewsSorting.Date or _ => newsQuery.OrderByDescending(n => n.Date),
+                
+            };
+
             var news = newsQuery
-                .OrderByDescending(n => n.Id)
                 .Select(n => new NewsListingViewModel
                 {
                     Id = n.Id,
@@ -56,9 +67,12 @@ namespace NewsRoom.Controllers
 
             return View(new AllNewsQueryModel
             {
+                Area = area,
                 Areas = newsAreas,
+                SearchTerm = searchTerm,
+                Sorting = sorting,
                 News = news,
-                SearchTerm = searchTerm
+               
             });
 
         }

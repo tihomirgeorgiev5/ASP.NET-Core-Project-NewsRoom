@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace NewsRoom.Models.News
 {
@@ -6,7 +7,8 @@ namespace NewsRoom.Models.News
     {
         public IEnumerable<string> Areas { get; init; }
 
-        public IEnumerable<string> SearchTerm { get; init; }
+        [Display(Name = "Search by text:")]
+        public string SearchTerm { get; init; }
 
         public NewsSorting Sorting { get; init; }
         public  IEnumerable<NewsListingViewModel> News { get; init; }

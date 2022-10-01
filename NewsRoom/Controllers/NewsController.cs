@@ -4,6 +4,7 @@ using NewsRoom.Data.Models;
 using NewsRoom.Models.News;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace NewsRoom.Controllers
 {
@@ -17,10 +18,18 @@ namespace NewsRoom.Controllers
             Categories = this.GetNewsCategories()
         });
 
-        public IActionResult All()
+        public IActionResult All(string searchTerm)
         {
-            var news = this.data
-                .News
+            var newsQuery = this.data.News.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                newsQuery = newsQuery.Where(n =>
+                 n.Area.ToLower().Contains(searchTerm.ToLower()) ||
+                n.Title.ToLower().Contains(searchTerm.ToLower()) ||
+                n.Description.ToLower().Contains(searchTerm.ToLower()));
+            }
+            var news = newsQuery
                 .OrderByDescending(n => n.Id)
                 .Select(n => new NewsListingViewModel
                 {
@@ -35,7 +44,8 @@ namespace NewsRoom.Controllers
 
             return View(new AllNewsQueryModel
             {
-                News = news
+                News = news,
+                SearchTerm = searchTerm
             });
 
         }

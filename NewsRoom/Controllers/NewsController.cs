@@ -13,32 +13,26 @@ namespace NewsRoom.Controllers
         private readonly NewsRoomDbContext data;
 
         public NewsController(NewsRoomDbContext data) => this.data = data;
-        public IActionResult Add() => View(new AddNewsFormModel 
-        {
-            Categories = this.GetNewsCategories()
-        });
+        
 
-        public IActionResult All(
-            string area,
-            string searchTerm,
-            NewsSorting sorting)
+        public IActionResult All([FromQuery]AllNewsQueryModel query)
         {
             var newsQuery = this.data.News.AsQueryable();
 
-            if (!string.IsNullOrWhiteSpace(area))
+            if (!string.IsNullOrWhiteSpace(query.Area))
             {
-                newsQuery = newsQuery.Where(n => n.Area == area);
+                newsQuery = newsQuery.Where(n => n.Area == query.Area);
             }
 
-            if (!string.IsNullOrWhiteSpace(searchTerm))
+            if (!string.IsNullOrWhiteSpace(query.SearchTerm))
             {
                 newsQuery = newsQuery.Where(n =>
-                 n.Area.ToLower().Contains(searchTerm.ToLower()) ||
-                n.Title.ToLower().Contains(searchTerm.ToLower()) ||
-                n.Description.ToLower().Contains(searchTerm.ToLower()));
+                 n.Area.ToLower().Contains(query.SearchTerm.ToLower()) ||
+                n.Title.ToLower().Contains(query.SearchTerm.ToLower()) ||
+                n.Description.ToLower().Contains(query.SearchTerm.ToLower()));
             }
 
-            newsQuery = sorting switch
+            newsQuery = query.Sorting switch
             {
                 NewsSorting.DateCreated => newsQuery.OrderByDescending(n => n.Id),
                 NewsSorting.AreaAndTitle => newsQuery.OrderBy(n => n.Area).ThenBy(n => n.Title),
@@ -65,17 +59,17 @@ namespace NewsRoom.Controllers
                 .OrderBy(a => a)
                 .ToList();
 
-            return View(new AllNewsQueryModel
-            {
-                Area = area,
-                Areas = newsAreas,
-                SearchTerm = searchTerm,
-                Sorting = sorting,
-                News = news,
-               
-            });
+            query.Areas = newsAreas;
+            query.News = news;
+
+            return View(query);
 
         }
+
+        public IActionResult Add() => View(new AddNewsFormModel
+        {
+            Categories = this.GetNewsCategories()
+        });
 
         [HttpPost]
         public IActionResult Add (AddNewsFormModel aNews)

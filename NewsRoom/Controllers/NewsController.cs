@@ -41,6 +41,8 @@ namespace NewsRoom.Controllers
             };
 
             var news = newsQuery
+                .Skip((query.CurrentPage - 1) * AllNewsQueryModel.NewsPerPage)
+                .Take(AllNewsQueryModel.NewsPerPage)
                 .Select(n => new NewsListingViewModel
                 {
                     Id = n.Id,

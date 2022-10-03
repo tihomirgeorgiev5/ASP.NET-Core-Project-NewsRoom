@@ -1,5 +1,9 @@
 ﻿@model AllNewsQueryModel
 
+@{ 
+    ViewData["Title"] = "All News";
+}
+
 <form method="get">
     <div class="row mb-5">
         <div class="form-group col-md-4">
@@ -51,5 +55,15 @@
 
         }
     }
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <a asp-controller="News" asp-action="All" asp-route-currentPage="@(Model.CurrentPage - 1)"><<</a>
+    </div>
+    <div class="col-md-6">
+        <a asp-controller="News" asp-action="All" asp-route-currentPage="@(Model.CurrentPage + 1)">>></a>
+    </div>
+
 </div>
 

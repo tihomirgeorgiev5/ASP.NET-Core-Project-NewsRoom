@@ -16,6 +16,8 @@ namespace NewsRoom.Models.News
 
         public int CurrentPage { get; init; } = 1;
 
+        public int TotalNews { get; set; }
+
         public IEnumerable<string> Areas { get; set; }
         public  IEnumerable<NewsListingViewModel> News { get; set; }
     }

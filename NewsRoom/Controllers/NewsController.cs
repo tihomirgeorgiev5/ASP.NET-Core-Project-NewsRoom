@@ -4,7 +4,6 @@ using NewsRoom.Data.Models;
 using NewsRoom.Models.News;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 
 namespace NewsRoom.Controllers
 {
@@ -40,6 +39,8 @@ namespace NewsRoom.Controllers
                 
             };
 
+            var totalNews = this.data.News.Count();
+
             var news = newsQuery
                 .Skip((query.CurrentPage - 1) * AllNewsQueryModel.NewsPerPage)
                 .Take(AllNewsQueryModel.NewsPerPage)
@@ -61,6 +62,7 @@ namespace NewsRoom.Controllers
                 .OrderBy(a => a)
                 .ToList();
 
+            query.TotalNews = totalNews;
             query.Areas = newsAreas;
             query.News = news;
 

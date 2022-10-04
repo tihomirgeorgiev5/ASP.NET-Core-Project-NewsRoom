@@ -39,7 +39,7 @@ namespace NewsRoom.Controllers
                 
             };
 
-            var totalNews = this.data.News.Count();
+            var totalNews = newsQuery.Count();
 
             var news = newsQuery
                 .Skip((query.CurrentPage - 1) * AllNewsQueryModel.NewsPerPage)

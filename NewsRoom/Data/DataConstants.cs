@@ -2,15 +2,32 @@
 {
     public class DataConstants
     {
-        public const int NewsAreaMaxLength = 30;
-        public const int NewsAreaMinLength = 2;
+        public class ANews
+        {
+            public const int AreaMaxLength = 30;
+            public const int AreaMinLength = 2;
 
-        public const int NewsTitleMaxLength = 500; 
-        public const int NewsTitleMinLength = 5; 
+            public const int TitleMaxLength = 500;
+            public const int TitleMinLength = 5;
 
-        public const int NewsDescriptionMaxLength = 10000;
-        public const int NewsDescriptionMinLength = 10;
+            public const int DescriptionMaxLength = 10000;
+            public const int DescriptionMinLength = 10;
 
-        public const int NewsDateMaxLength = 01-01-2025;
+            public const int DateMaxLength = 01 - 01 - 2025;
+        }
+
+        public class Category
+        {
+            public const int NameMaxLength = 20;
+        }
+
+        public class Journalist
+        {
+            public const int NameMaxLength = 30;
+            public const int PhoneNumberMaxLength = 30;
+        }
+       
+
+        
     }
 }

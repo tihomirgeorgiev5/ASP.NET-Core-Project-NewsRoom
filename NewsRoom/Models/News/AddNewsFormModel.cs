@@ -1,28 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using static NewsRoom.Data.DataConstants;
+using static NewsRoom.Data.DataConstants.ANews;
 
 namespace NewsRoom.Models.News
 {
     public class AddNewsFormModel
     {
         [Required]
-        [StringLength(NewsAreaMaxLength, MinimumLength = NewsAreaMinLength)]
+        [StringLength(AreaMaxLength, MinimumLength = AreaMinLength)]
 
         public string Area { get; init; }
 
         [Required]
         [StringLength(
             int.MaxValue,
-            MinimumLength = NewsTitleMinLength,
+            MinimumLength = TitleMinLength,
             ErrorMessage = "Sorry characters allowed for Title are too long")]
         public string Title { get; init; }
 
         [Required]
         [StringLength(
             int.MaxValue,
-            MinimumLength = NewsDescriptionMinLength,
+            MinimumLength = DescriptionMinLength,
             ErrorMessage = "The field Description must be a text with a minimum length of {2}.")]
         public string Description { get; init; }
 

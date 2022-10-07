@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NewsRoom.Data;
 using NewsRoom.Data.Models;
 using NewsRoom.Models.News;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 
 namespace NewsRoom.Controllers
 {
@@ -70,12 +72,21 @@ namespace NewsRoom.Controllers
 
         }
 
-        public IActionResult Add() => View(new AddNewsFormModel
+        [Authorize]
+        public IActionResult Add()
         {
-            Categories = this.GetNewsCategories()
-        });
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userIsJournalist = this.data
+                .Journalists
+                .Any(j => j.UserId == userId);
+            return View(new AddNewsFormModel
+            {
+                Categories = this.GetNewsCategories()
+            });
+        }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Add (AddNewsFormModel aNews)
         {
             if(!this.data.Categories.Any(n => n.Id == aNews.CategoryId))

@@ -95,7 +95,13 @@ namespace NewsRoom.Controllers
         [Authorize]
         public IActionResult Add (AddNewsFormModel aNews)
         {
-            if (!this.UserIsDealer())
+            var journalistId = this.data
+                .Journalists
+                .Where(j => j.UserId == this.User.GetId())
+                .Select(j => j.Id)
+                .FirstOrDefault();
+
+            if (journalistId == 0)
             {
                 return RedirectToAction(nameof(JournalistsController.Become), "Journalists");
             }
@@ -117,6 +123,7 @@ namespace NewsRoom.Controllers
                 ImageUrl = aNews.ImageUrl,
                 Date = aNews.Date,
                 CategoryId = aNews.CategoryId,
+                JournalistId = journalistId,
             };
 
             this.data.News.Add(aNewsData);

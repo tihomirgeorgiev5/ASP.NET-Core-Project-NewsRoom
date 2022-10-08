@@ -82,7 +82,7 @@ namespace NewsRoom.Controllers
             {
                 
 
-                return RedirectToAction(nameof(JournalistsController.Create), "Journalists");
+                return RedirectToAction(nameof(JournalistsController.Become), "Journalists");
             }
 
             return View(new AddNewsFormModel
@@ -97,7 +97,7 @@ namespace NewsRoom.Controllers
         {
             if (!this.UserIsDealer())
             {
-                return RedirectToAction(nameof(JournalistsController.Create), "Journalists");
+                return RedirectToAction(nameof(JournalistsController.Become), "Journalists");
             }
             if (!this.data.Categories.Any(n => n.Id == aNews.CategoryId))
             {

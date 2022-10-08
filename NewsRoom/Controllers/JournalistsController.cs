@@ -17,13 +17,13 @@ namespace NewsRoom.Controllers
 
 
         [Authorize]
-        public IActionResult Create()
+        public IActionResult Become()
             => View();
 
         [HttpPost]
         [Authorize]
 
-        public IActionResult Create(BecomeJournalistFormModel journalist)
+        public IActionResult Become(BecomeJournalistFormModel journalist)
         {
             var userId = this.User.GetId();
 

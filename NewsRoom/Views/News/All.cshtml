@@ -70,6 +70,11 @@
 
 </div>
 
+@if (!Model.News.Any())
+{
+    <h2 class="text-center">No news found by the given criteria!</h2>
+
+}
 
 
 <div class="row">

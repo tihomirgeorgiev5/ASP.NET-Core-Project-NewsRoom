@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using NewsRoom.Data;
 using NewsRoom.Data.Models;
+using NewsRoom.Infrastructure;
 using NewsRoom.Models.News;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,9 +77,11 @@ namespace NewsRoom.Controllers
         public IActionResult Add()
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
             var userIsJournalist = this.data
                 .Journalists
-                .Any(j => j.UserId == userId);
+                .Any(j => j.UserId == this.User.GetId());
+
             return View(new AddNewsFormModel
             {
                 Categories = this.GetNewsCategories()

@@ -16,7 +16,7 @@ namespace NewsRoom.Controllers
 
         public NewsController(NewsRoomDbContext data) => this.data = data;
         
-
+         
         public IActionResult All([FromQuery]AllNewsQueryModel query)
         {
             var newsQuery = this.data.News.AsQueryable();
@@ -76,11 +76,14 @@ namespace NewsRoom.Controllers
         [Authorize]
         public IActionResult Add()
         {
-            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            
 
-            var userIsJournalist = this.data
-                .Journalists
-                .Any(j => j.UserId == this.User.GetId());
+            if (!this.UserIsDealer())
+            {
+                
+
+                return RedirectToAction(nameof(JournalistsController.Create), "Journalists");
+            }
 
             return View(new AddNewsFormModel
             {
@@ -92,7 +95,11 @@ namespace NewsRoom.Controllers
         [Authorize]
         public IActionResult Add (AddNewsFormModel aNews)
         {
-            if(!this.data.Categories.Any(n => n.Id == aNews.CategoryId))
+            if (!this.UserIsDealer())
+            {
+                return RedirectToAction(nameof(JournalistsController.Create), "Journalists");
+            }
+            if (!this.data.Categories.Any(n => n.Id == aNews.CategoryId))
             {
                 this.ModelState.AddModelError(nameof(aNews.CategoryId), "Category does not exist.");
             }
@@ -117,6 +124,11 @@ namespace NewsRoom.Controllers
 
             return RedirectToAction(nameof(All));
         }
+         
+        private bool UserIsDealer()
+            => this.data
+                .Journalists
+                .Any(j => j.UserId == this.User.GetId());
 
         private IEnumerable<NewsCategoryViewModel> GetNewsCategories() =>
             this.data

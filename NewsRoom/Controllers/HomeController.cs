@@ -15,6 +15,7 @@ namespace NewsRoom.Controllers
         public IActionResult Index()
         {
             var totalNews = this.data.News.Count();
+            var totalReaders = this.data.Users.Count();
 
             var news = this.data
                .News

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NewsRoom.Data;
+using NewsRoom.Models.Api.Statistics;
+using System.Linq;
 
 namespace NewsRoom.Controllers.Api
 {
@@ -11,6 +13,21 @@ namespace NewsRoom.Controllers.Api
 
         public StatisticsApiController(NewsRoomDbContext data)
             => this.data = data;
+
+        public StatisticsResponseModel GetStatistics()
+        {
+            var totalNews = this.data.News.Count();
+            var totalReaders = this.data.Users.Count();
+
+            var statistics = new StatisticsResponseModel
+            {
+                TotalNews = totalNews,
+                TotalReaders = totalReaders,   
+                TotalWriters = 0,
+            };
+
+            return statistics;
+        }
 
 
 

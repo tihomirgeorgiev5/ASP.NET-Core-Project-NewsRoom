@@ -87,3 +87,11 @@
         </h2>
     </div>
 </div>
+
+@section Scripts {
+<script>
+    $.get('/api/statistics', (data) => {
+        console.log('OK'); 
+    })
+</script>
+} 

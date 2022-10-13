@@ -74,7 +74,13 @@
 
 <div class="mb-5"></div>
 
-<div class="jumbotron">
+<div class="row">
+    <div class="col-12 text-center">
+        <button class="btn btn-primary" id="statistics-button">Show Statistics</button>
+    </div>
+</div>
+
+<div class="jumbotron d-none">
     <div class="row">
         <h2 class="col-md-4 text-center">
             @Model.TotalNews News
@@ -90,8 +96,10 @@
 
 @section Scripts {
 <script>
-    $.get('/api/statistics', (data) => {
-        console.log('OK'); 
-    })
+    $('#statistics-button').on('click', ev => {
+        $.get('/api/statistics', (data) => {
+            console.log(data);
+        })
+    });
 </script>
 } 

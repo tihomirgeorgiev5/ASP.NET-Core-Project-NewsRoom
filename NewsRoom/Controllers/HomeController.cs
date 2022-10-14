@@ -34,6 +34,7 @@ namespace NewsRoom.Controllers
             return View(new IndexViewModel 
             { 
                 TotalNews = totalNews,
+                TotalReaders = totalReaders,
                 News = news,
             });
         }

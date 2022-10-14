@@ -80,17 +80,11 @@
     </div>
 </div>
 
-<div class="jumbotron d-none">
+<div class="jumbotron d-none" id="statistics">
     <div class="row">
-        <h2 class="col-md-4 text-center">
-            @Model.TotalNews News
-        </h2>
-        <h2 class="col-md-4 text-center">
-            @Model.TotalReaders Readers
-        </h2>
-        <h2 class="col-md-4 text-center">
-            @Model.TotalWriters Writers
-        </h2>
+        <h2 class="col-md-4 text-center" id="total-news"></h2>
+        <h2 class="col-md-4 text-center" id="total-readers"> </h2>
+        <h2 class="col-md-4 text-center" id="total-writers"></h2>
     </div>
 </div>
 
@@ -98,7 +92,11 @@
 <script>
     $('#statistics-button').on('click', ev => {
         $.get('/api/statistics', (data) => {
-            console.log(data);
+            $('#total-news').text(data.totalNews + " News");
+            $('#total-readers').text(data.totalReaders + " Readers");
+            $('#total-writers').text(data.totalWriters + " Writers");
+
+            $('#statistics').removeClass('d-none');
         })
     });
 </script>

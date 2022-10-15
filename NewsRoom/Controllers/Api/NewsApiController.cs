@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NewsRoom.Data;
 using NewsRoom.Models;
-using NewsRoom.Models.News;
-using System.Collections;
+using NewsRoom.Models.Api.News;
 using System.Linq;
 
 namespace NewsRoom.Controllers.Api
@@ -16,7 +15,8 @@ namespace NewsRoom.Controllers.Api
         public NewsApiController(NewsRoomDbContext data)
             => this.data = data;
 
-        public IActionResult All([FromQuery] AllNewsQueryModel query)
+        [HttpGet]
+        public ActionResult<AllNewsApiResponseModel> All([FromQuery] AllNewsApiRequestModel query)
         {
             var newsQuery = this.data.News.AsQueryable();
 
@@ -44,9 +44,9 @@ namespace NewsRoom.Controllers.Api
             var totalNews = newsQuery.Count();
 
             var news = newsQuery
-                .Skip((query.CurrentPage - 1) * AllNewsQueryModel.NewsPerPage)
-                .Take(AllNewsQueryModel.NewsPerPage)
-                .Select(n => new NewsListingViewModel
+                .Skip((query.CurrentPage - 1) * query.NewsPerPage)
+                .Take(query.NewsPerPage)
+                .Select(n => new NewsResponseModel
                 {
                     Id = n.Id,
                     Area = n.Area,
@@ -57,18 +57,14 @@ namespace NewsRoom.Controllers.Api
                 })
                 .ToList();
 
-            var newsAreas = this.data
-                .News
-                .Select(n => n.Area)
-                .Distinct()
-                .OrderBy(a => a)
-                .ToList();
+            return new AllNewsApiResponseModel
+            {
+                CurrentPage = query.CurrentPage,
+                TotalNews = totalNews,
+                News = news,
+            };
 
-            query.TotalNews = totalNews;
-            query.Areas = newsAreas;
-            query.News = news;
-
-            return Ok(query);
+           
         }
 
 

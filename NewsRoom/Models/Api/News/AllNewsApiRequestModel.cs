@@ -14,6 +14,8 @@ namespace NewsRoom.Models.Api.News
 
         public int CurrentPage { get; init; } = 1;
 
-        public int TotalNews { get; set; }
+        public int NewsPerPage { get; set; } = 10;
+
+        public int TotalNews { get; init; }
     }
 }

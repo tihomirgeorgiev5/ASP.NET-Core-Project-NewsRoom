@@ -30,7 +30,7 @@ namespace NewsRoom
                 .UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
             services
                 .AddDatabaseDeveloperPageExceptionFilter();
-
+             
             services
                 .AddDefaultIdentity<IdentityUser>(options =>
                 {
@@ -39,6 +39,7 @@ namespace NewsRoom
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireUppercase = false;
                 })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<NewsRoomDbContext>();
             services
                 .AddControllersWithViews(options =>

@@ -14,7 +14,7 @@ namespace NewsRoom.Models.News
 
         public NewsSorting Sorting { get; init; }
 
-        public int CurrentPage { get; init; } = 1;
+        public int CurrentPage { get; init; } = 1; 
 
         public int TotalNews { get; set; }
 

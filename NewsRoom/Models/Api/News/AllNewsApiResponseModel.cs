@@ -6,7 +6,9 @@ namespace NewsRoom.Models.Api.News
     {
         public int CurrentPage { get; init; }
 
-        public int TotalNews { get; set; }
+        public int NewsPerPage { get; init; }
+
+        public int TotalNews { get; init; }
 
         public IEnumerable<NewsResponseModel> News { get; init; }
     }

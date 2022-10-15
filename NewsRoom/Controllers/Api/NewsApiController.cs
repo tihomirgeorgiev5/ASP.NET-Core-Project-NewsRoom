@@ -60,6 +60,7 @@ namespace NewsRoom.Controllers.Api
             return new AllNewsApiResponseModel
             {
                 CurrentPage = query.CurrentPage,
+                NewsPerPage = query.NewsPerPage,
                 TotalNews = totalNews,
                 News = news,
             };

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NewsRoom.Data;
+using NewsRoom.Models;
 using NewsRoom.Models.News;
 using System.Collections;
 using System.Linq;

@@ -1,4 +1,4 @@
-﻿namespace NewsRoom.Models.News
+﻿namespace NewsRoom.Models
 {
     public enum NewsSorting
     {

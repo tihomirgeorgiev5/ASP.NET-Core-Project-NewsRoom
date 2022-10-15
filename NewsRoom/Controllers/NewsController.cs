@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using NewsRoom.Data;
 using NewsRoom.Data.Models;
 using NewsRoom.Infrastructure;
+using NewsRoom.Models;
 using NewsRoom.Models.News;
 using System.Collections.Generic;
 using System.Linq;

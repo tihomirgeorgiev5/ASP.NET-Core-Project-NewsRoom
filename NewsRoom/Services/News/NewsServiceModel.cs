@@ -1,9 +1,13 @@
 ﻿using System;
 
-namespace NewsRoom.Models.News
+namespace NewsRoom.Services.News
 {
-    public class NewsListingViewModel
+    public class NewsServiceModel
     {
+        public NewsServiceModel()
+        {
+        }
+
         public int Id { get; init; }
         public string Area { get; init; }
 

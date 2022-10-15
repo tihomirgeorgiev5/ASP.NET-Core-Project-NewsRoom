@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using NewsRoom.Services.News;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace NewsRoom.Models.News
@@ -19,6 +20,6 @@ namespace NewsRoom.Models.News
         public int TotalNews { get; set; }
 
         public IEnumerable<string> Areas { get; set; }
-        public  IEnumerable<NewsListingViewModel> News { get; set; }
+        public  IEnumerable<NewsServiceModel> News { get; set; }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace NewsRoom.Models.Api.News
+namespace NewsRoom.Services.News
 {
-    public class AllNewsApiResponseModel
+    public class NewsQueryServiceModel
     {
         public int CurrentPage { get; init; }
 
@@ -10,6 +10,6 @@ namespace NewsRoom.Models.Api.News
 
         public int TotalNews { get; init; }
 
-        public IEnumerable<NewsResponseModel> News { get; init; }
+        public IEnumerable<NewsServiceModel> News { get; init; }
     }
 }

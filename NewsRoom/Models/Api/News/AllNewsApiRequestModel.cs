@@ -6,7 +6,6 @@ namespace NewsRoom.Models.Api.News
     {
         public string Area { get; init; }
 
-
         
         public string SearchTerm { get; init; }
 
@@ -16,6 +15,6 @@ namespace NewsRoom.Models.Api.News
 
         public int NewsPerPage { get; set; } = 10;
 
-        public int TotalNews { get; init; }
+     
     }
 }

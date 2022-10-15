@@ -5,6 +5,7 @@ using NewsRoom.Data.Models;
 using NewsRoom.Infrastructure;
 using NewsRoom.Models;
 using NewsRoom.Models.News;
+using NewsRoom.Services.News;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,62 +13,30 @@ namespace NewsRoom.Controllers
 {
     public class NewsController : Controller
     {
+        private readonly INewsService news;
         private readonly NewsRoomDbContext data;
 
-        public NewsController(NewsRoomDbContext data) => this.data = data;
+        public NewsController(INewsService news, NewsRoomDbContext data)
+        {
+            this.news = news;
+            this.data = data;
+        }
         
          
-        public IActionResult All([FromQuery]AllNewsQueryModel query)
+        public IActionResult All([FromQuery] AllNewsQueryModel query)
         {
-            var newsQuery = this.data.News.AsQueryable();
+            var queryResult = this.news.All(
+                query.Area,
+                query.SearchTerm,
+                query.Sorting,
+                query.CurrentPage,
+                AllNewsQueryModel.NewsPerPage);
 
-            if (!string.IsNullOrWhiteSpace(query.Area))
-            {
-                newsQuery = newsQuery.Where(n => n.Area == query.Area);
-            }
+            var newsAreas = this.news.AllNewsAreas();
 
-            if (!string.IsNullOrWhiteSpace(query.SearchTerm))
-            {
-                newsQuery = newsQuery.Where(n =>
-                 n.Area.ToLower().Contains(query.SearchTerm.ToLower()) ||
-                n.Title.ToLower().Contains(query.SearchTerm.ToLower()) ||
-                n.Description.ToLower().Contains(query.SearchTerm.ToLower()));
-            }
-
-            newsQuery = query.Sorting switch
-            {
-                NewsSorting.DateCreated => newsQuery.OrderByDescending(n => n.Id),
-                NewsSorting.AreaAndTitle => newsQuery.OrderBy(n => n.Area).ThenBy(n => n.Title),
-                NewsSorting.Date or _ => newsQuery.OrderByDescending(n => n.Date),
-                
-            };
-
-            var totalNews = newsQuery.Count();
-
-            var news = newsQuery
-                .Skip((query.CurrentPage - 1) * AllNewsQueryModel.NewsPerPage)
-                .Take(AllNewsQueryModel.NewsPerPage)
-                .Select(n => new NewsListingViewModel
-                {
-                    Id = n.Id,
-                    Area = n.Area,
-                    Title = n.Title,
-                    ImageUrl = n.ImageUrl,
-                    Date = n.Date,
-                    Category = n.Category.Name
-                })
-                .ToList();
-
-            var newsAreas = this.data
-                .News
-                .Select(n => n.Area)
-                .Distinct()
-                .OrderBy(a => a)
-                .ToList();
-
-            query.TotalNews = totalNews;
+            query.TotalNews = queryResult.TotalNews;
             query.Areas = newsAreas;
-            query.News = news;
+            query.News = queryResult.News;
 
             return View(query);
 

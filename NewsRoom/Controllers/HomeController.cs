@@ -2,6 +2,7 @@
 using NewsRoom.Data;
 using NewsRoom.Models;
 using NewsRoom.Models.Home;
+using NewsRoom.Services.Statistics;
 using System.Diagnostics;
 using System.Linq;
 
@@ -9,14 +10,19 @@ namespace NewsRoom.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IStatisticsService statistics;
         private readonly NewsRoomDbContext data;
 
-        public HomeController(NewsRoomDbContext data) => this.data = data;
+        public HomeController(
+            IStatisticsService statistics,
+            NewsRoomDbContext data)
+        {
+            this.statistics = statistics;
+            this.data = data;
+        }
+        
         public IActionResult Index()
         {
-            var totalNews = this.data.News.Count();
-            var totalReaders = this.data.Users.Count();
-
             var news = this.data
                .News
                .OrderByDescending(n => n.Id)
@@ -31,10 +37,12 @@ namespace NewsRoom.Controllers
                .Take(3)
                .ToList();
 
+            var totalStatistics = this.statistics.Total();
+
             return View(new IndexViewModel 
             { 
-                TotalNews = totalNews,
-                TotalReaders = totalReaders,
+                TotalNews = totalStatistics.TotalNews,
+                TotalReaders = totalStatistics.TotalReaders,
                 News = news,
             });
         }

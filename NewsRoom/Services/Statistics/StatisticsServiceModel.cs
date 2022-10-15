@@ -1,6 +1,6 @@
-﻿namespace NewsRoom.Models.Api.Statistics
+﻿namespace NewsRoom.Services.Statistics
 {
-    public class StatisticsResponseModel
+    public class StatisticsServiceModel
     {
         public int TotalNews { get; init; }
 

@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NewsRoom.Data;
 using NewsRoom.Infrastructure;
+using NewsRoom.Services.Statistics;
 
 namespace NewsRoom
 {
@@ -39,6 +40,8 @@ namespace NewsRoom
                 .AddEntityFrameworkStores<NewsRoomDbContext>();
             services
                 .AddControllersWithViews();
+
+            services.AddTransient<IStatisticsService, StatisticsService>();
         }
 
 

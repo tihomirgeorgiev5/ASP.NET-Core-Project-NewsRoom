@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NewsRoom.Data;
 using NewsRoom.Infrastructure;
+using NewsRoom.Services.Journalists;
 using NewsRoom.Services.News;
 using NewsRoom.Services.Statistics;
 
@@ -49,6 +50,7 @@ namespace NewsRoom
 
             services.AddTransient<IStatisticsService, StatisticsService>();
             services.AddTransient<INewsService, NewsService>();
+            services.AddTransient<IJournalistService, JournalistService>();
         }
 
 

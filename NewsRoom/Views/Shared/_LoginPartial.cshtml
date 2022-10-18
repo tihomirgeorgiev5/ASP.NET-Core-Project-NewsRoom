@@ -1,13 +1,30 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using NewsRoom.Services.Journalists
+
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+@inject IJournalistService Journalists
 
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Journalists" asp-action="Become">Become Journalist</a>
-        </li>
+        var userId = User.GetId();
+        var userIsJournalist = Journalists.IsJournalist(userId);
+
+        @if (userIsJournalist)
+        { 
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="Mine">My News</a>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Journalists" asp-action="Become">Become Journalist</a>
+            </li>
+
+        }
+
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Account</a>
         </li>
@@ -17,6 +34,7 @@
                 <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
             </form>
         </li>
+
     }
     else
     {

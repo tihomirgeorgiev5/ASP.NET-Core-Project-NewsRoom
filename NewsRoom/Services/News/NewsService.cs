@@ -1,4 +1,5 @@
 ﻿using NewsRoom.Data;
+using NewsRoom.Data.Models;
 using NewsRoom.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,19 +45,11 @@ namespace NewsRoom.Services.News
 
             var totalNews = newsQuery.Count();
 
-            var news = newsQuery
+            var news = GetNews(
+                newsQuery
                 .Skip((currentPage - 1) * newsPerPage)
-                .Take(newsPerPage)
-                .Select(n => new NewsServiceModel
-                {
-                    Id = n.Id,
-                    Area = n.Area,
-                    Title = n.Title,
-                    ImageUrl = n.ImageUrl,
-                    Date = n.Date,
-                    Category = n.Category.Name
-                })
-                .ToList();
+                .Take(newsPerPage));
+                
 
             return new NewsQueryServiceModel
             {
@@ -69,12 +62,30 @@ namespace NewsRoom.Services.News
             
         }
 
+        public IEnumerable<NewsServiceModel> ByUser(string userId)
+            => this.GetNews(this.data
+                .News
+                .Where(n => n.Journalist.UserId == userId));
+
         public IEnumerable<string> AllNewsAreas()
             => this.data
                 .News
                 .Select(n => n.Area)
                 .Distinct()
                 .OrderBy(a => a)
+                .ToList();
+
+        private IEnumerable<NewsServiceModel> GetNews(IQueryable<ANews> NewsQuery)
+            => NewsQuery
+            .Select(n => new NewsServiceModel
+            {
+                Id = n.Id,
+                Area = n.Area,
+                Title = n.Title,
+                ImageUrl = n.ImageUrl,
+                Date = n.Date,
+                Category = n.Category.Name
+            })
                 .ToList();
 
     }

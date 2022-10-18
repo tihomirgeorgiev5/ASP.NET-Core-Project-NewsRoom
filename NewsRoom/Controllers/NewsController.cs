@@ -43,6 +43,12 @@ namespace NewsRoom.Controllers
         }
 
         [Authorize]
+        public IActionResult Mine()
+        {
+
+        }
+
+        [Authorize]
         public IActionResult Add()
         {
             

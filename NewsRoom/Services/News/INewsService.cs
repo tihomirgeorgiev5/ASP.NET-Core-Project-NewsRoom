@@ -13,6 +13,8 @@ namespace NewsRoom.Services.News
             int newsPerPage
             );
 
+        IEnumerable<NewsServiceModel> ByUser(string userId);
+
         IEnumerable<string> AllNewsAreas();
     }
 }

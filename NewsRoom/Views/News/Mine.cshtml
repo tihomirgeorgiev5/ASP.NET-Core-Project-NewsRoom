@@ -1,0 +1,30 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@if (!Model.Any())
+{
+    <h2 class="text-center">You do not have any News yet!</h2>
+
+}
+
+<div class="row">
+    @{
+        foreach (var aNews in Model)
+        {
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <img src="@aNews.ImageUrl" class="card-img-top" alt="@aNews.Area => @aNews.Title - @aNews.Date (@aNews.Category)">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-center">@aNews.Area => @aNews.Title (@aNews.Date)</h5>
+                        <a asp-controller="News" asp-action="Details" asp-route-id="@aNews.Id" class="btn btn-primary">View More</a>
+                    </div>
+                </div>
+            </div>
+
+
+        }
+    }
+</div>

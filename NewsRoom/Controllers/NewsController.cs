@@ -45,7 +45,9 @@ namespace NewsRoom.Controllers
         [Authorize]
         public IActionResult Mine()
         {
+            var myNews = this.news.ByUser(this.User.GetId());
 
+            return View(myNews);
         }
 
         [Authorize]

@@ -63,7 +63,7 @@ namespace NewsRoom.Services.News
         }
 
         public IEnumerable<NewsServiceModel> ByUser(string userId)
-            => this.GetNews(this.data
+            => GetNews(this.data
                 .News
                 .Where(n => n.Journalist.UserId == userId));
 
@@ -75,7 +75,7 @@ namespace NewsRoom.Services.News
                 .OrderBy(a => a)
                 .ToList();
 
-        private IEnumerable<NewsServiceModel> GetNews(IQueryable<ANews> NewsQuery)
+        private static IEnumerable<NewsServiceModel> GetNews(IQueryable<ANews> NewsQuery)
             => NewsQuery
             .Select(n => new NewsServiceModel
             {

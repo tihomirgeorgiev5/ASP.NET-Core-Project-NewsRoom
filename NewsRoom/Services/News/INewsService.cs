@@ -15,6 +15,7 @@ namespace NewsRoom.Services.News
 
         IEnumerable<NewsServiceModel> ByUser(string userId);
 
-        IEnumerable<string> AllNewsAreas();
+        IEnumerable<string> AllAreas();
+        IEnumerable<NewsCategoryServiceModel> AllCategories();
     }
 }

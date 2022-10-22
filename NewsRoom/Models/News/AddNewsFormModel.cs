@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NewsRoom.Services.News;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using static NewsRoom.Data.DataConstants.ANews;
@@ -37,6 +38,6 @@ namespace NewsRoom.Models.News
         [Display(Name = "Category")]
         public int CategoryId { get; init; }
 
-        public IEnumerable<NewsCategoryViewModel> Categories { get; set; }
+        public IEnumerable<NewsCategoryServiceModel> Categories { get; set; }
     } 
 }

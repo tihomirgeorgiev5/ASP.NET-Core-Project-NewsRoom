@@ -9,9 +9,9 @@ namespace NewsRoom.Services.News
     public class NewsService : INewsService
     {
         private readonly NewsRoomDbContext data;
-        public NewsService(NewsRoomDbContext data) 
+        public NewsService(NewsRoomDbContext data)
             => this.data = data;
-        
+
 
         public NewsQueryServiceModel All(
             string area,
@@ -49,7 +49,7 @@ namespace NewsRoom.Services.News
                 newsQuery
                 .Skip((currentPage - 1) * newsPerPage)
                 .Take(newsPerPage));
-                
+
 
             return new NewsQueryServiceModel
             {
@@ -59,7 +59,7 @@ namespace NewsRoom.Services.News
                 News = news
             };
 
-            
+
         }
 
         public IEnumerable<NewsServiceModel> ByUser(string userId)
@@ -67,13 +67,23 @@ namespace NewsRoom.Services.News
                 .News
                 .Where(n => n.Journalist.UserId == userId));
 
-        public IEnumerable<string> AllNewsAreas()
+        public IEnumerable<string> AllAreas()
             => this.data
                 .News
                 .Select(n => n.Area)
                 .Distinct()
                 .OrderBy(a => a)
                 .ToList();
+
+        public IEnumerable<NewsCategoryServiceModel> AllCategories()
+              => this.data
+         .Categories
+         .Select(n => new NewsCategoryServiceModel
+         {
+             Id = n.Id,
+             Name = n.Name,
+         })
+         .ToList();
 
         private static IEnumerable<NewsServiceModel> GetNews(IQueryable<ANews> NewsQuery)
             => NewsQuery
@@ -88,5 +98,6 @@ namespace NewsRoom.Services.News
             })
                 .ToList();
 
+       
     }
 }

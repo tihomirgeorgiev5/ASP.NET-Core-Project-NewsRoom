@@ -35,7 +35,7 @@ namespace NewsRoom.Controllers
                 query.CurrentPage,
                 AllNewsQueryModel.NewsPerPage);
 
-            var newsAreas = this.news.AllNewsAreas();
+            var newsAreas = this.news.AllAreas();
 
             query.TotalNews = queryResult.TotalNews;
             query.Areas = newsAreas;
@@ -67,8 +67,8 @@ namespace NewsRoom.Controllers
 
             return View(new AddNewsFormModel
             {
-                Categories = this.GetNewsCategories()
-            });
+                Categories = this.news.AllCategories()
+            }) ;
         }
 
         [HttpPost]
@@ -91,7 +91,7 @@ namespace NewsRoom.Controllers
             }
             if (!ModelState.IsValid)
             {
-                aNews.Categories = this.GetNewsCategories();
+                aNews.Categories = this.news.AllCategories();
                 return View(aNews);
             }
 
@@ -112,15 +112,7 @@ namespace NewsRoom.Controllers
             return RedirectToAction(nameof(All));
         }
    
-        private IEnumerable<NewsCategoryViewModel> GetNewsCategories() =>
-            this.data
-            .Categories
-            .Select(n => new NewsCategoryViewModel
-            {
-                Id = n.Id,
-                Name = n.Name,
-            })
-            .ToList();
+      
        
     }
 }

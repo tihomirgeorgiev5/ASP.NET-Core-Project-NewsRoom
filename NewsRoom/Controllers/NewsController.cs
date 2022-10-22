@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using NewsRoom.Data;
 using NewsRoom.Data.Models;
 using NewsRoom.Infrastructure;
-using NewsRoom.Models;
 using NewsRoom.Models.News;
+using NewsRoom.Services.Journalists;
 using NewsRoom.Services.News;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,15 +14,18 @@ namespace NewsRoom.Controllers
     public class NewsController : Controller
     {
         private readonly INewsService news;
+        private readonly IJournalistService journalists;
         private readonly NewsRoomDbContext data;
 
-        public NewsController(INewsService news, NewsRoomDbContext data)
+        public NewsController(INewsService news, IJournalistService journalists, NewsRoomDbContext data)
         {
             this.news = news;
+            this.journalists = journalists;
             this.data = data;
+            
         }
-        
-         
+
+
         public IActionResult All([FromQuery] AllNewsQueryModel query)
         {
             var queryResult = this.news.All(
@@ -55,7 +58,7 @@ namespace NewsRoom.Controllers
         {
             
 
-            if (!this.UserIsDealer())
+            if (!this.journalists.IsJournalist(this.User.GetId()))
             {
                 
 
@@ -108,12 +111,7 @@ namespace NewsRoom.Controllers
 
             return RedirectToAction(nameof(All));
         }
-         
-        private bool UserIsDealer()
-            => this.data
-                .Journalists
-                .Any(j => j.UserId == this.User.GetId());
-
+   
         private IEnumerable<NewsCategoryViewModel> GetNewsCategories() =>
             this.data
             .Categories

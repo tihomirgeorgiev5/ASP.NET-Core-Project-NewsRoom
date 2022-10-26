@@ -6,7 +6,7 @@ using static NewsRoom.Data.DataConstants.ANews;
 
 namespace NewsRoom.Models.News
 {
-    public class AddNewsFormModel
+    public class NewsFormModel
     {
         [Required]
         [StringLength(AreaMaxLength, MinimumLength = AreaMinLength)]

@@ -65,7 +65,7 @@ namespace NewsRoom.Controllers
                 return RedirectToAction(nameof(JournalistsController.Become), "Journalists");
             }
 
-            return View(new AddNewsFormModel
+            return View(new NewsFormModel
             {
                 Categories = this.news.AllCategories()
             }) ;
@@ -73,7 +73,7 @@ namespace NewsRoom.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult Add (AddNewsFormModel aNews)
+        public IActionResult Add (NewsFormModel aNews)
         {
             var journalistId = this.data
                 .Journalists

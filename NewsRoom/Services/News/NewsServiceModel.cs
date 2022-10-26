@@ -4,10 +4,7 @@ namespace NewsRoom.Services.News
 {
     public class NewsServiceModel
     {
-        public NewsServiceModel()
-        {
-        }
-
+       
         public int Id { get; init; }
         public string Area { get; init; }
 

@@ -62,6 +62,24 @@ namespace NewsRoom.Services.News
 
         }
 
+        public NewsDetailsServiceModel Details(int id)
+        => this.data
+            .News
+            .Where(n => n.Id == id)
+            .Select(n => new NewsDetailsServiceModel
+            {
+                Id = n.Id,
+                Area = n.Area,
+                Title = n.Title,
+                Description = n.Description,
+                ImageUrl = n.ImageUrl,
+                Date = n.Date,
+                Category = n.Category.Name,
+                JournalistName = n.Journalist.Name,
+                UserId = n.Journalist.UserId
+            })
+            .FirstOrDefault();
+
         public IEnumerable<NewsServiceModel> ByUser(string userId)
             => GetNews(this.data
                 .News

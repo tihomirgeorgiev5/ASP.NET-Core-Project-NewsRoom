@@ -42,7 +42,7 @@ namespace NewsRoom.Controllers
         [Authorize]
         public IActionResult Mine()
         {
-            var myNews = this.news.ByUser(this.User.GetId());
+            var myNews = this.news.ByUser(this.User.Id());
 
             return View(myNews);
         }
@@ -52,7 +52,7 @@ namespace NewsRoom.Controllers
         {
             
 
-            if (!this.journalists.IsJournalist(this.User.GetId()))
+            if (!this.journalists.IsJournalist(this.User.Id()))
             {
                 
 
@@ -69,7 +69,7 @@ namespace NewsRoom.Controllers
         [Authorize]
         public IActionResult Add (NewsFormModel aNews)
         {
-            var journalistId = this.journalists.IdByUser(this.User.GetId());
+            var journalistId = this.journalists.IdByUser(this.User.Id());
 
             if (journalistId == 0)
             {
@@ -100,7 +100,7 @@ namespace NewsRoom.Controllers
 
         public IActionResult Edit(int id)
         {
-            var userId = this.User.GetId();
+            var userId = this.User.Id();
             if (!this.journalists.IsJournalist(userId))
             {
                 return RedirectToAction(nameof(JournalistsController.Become), "Journalists");
@@ -131,7 +131,7 @@ namespace NewsRoom.Controllers
 
         public IActionResult Edit(int id, NewsFormModel aNews)
         {
-            var journalistId = this.journalists.IdByUser(this.User.GetId());
+            var journalistId = this.journalists.IdByUser(this.User.Id());
 
             if (journalistId == 0)
             {

@@ -25,7 +25,7 @@ namespace NewsRoom.Controllers
 
         public IActionResult Become(BecomeJournalistFormModel journalist)
         {
-            var userId = this.User.GetId();
+            var userId = this.User.Id();
 
             var userIsAlreadyJournalist = this.data
                 .Journalists

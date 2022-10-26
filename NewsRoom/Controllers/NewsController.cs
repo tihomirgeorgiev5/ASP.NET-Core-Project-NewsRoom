@@ -81,7 +81,7 @@ namespace NewsRoom.Controllers
             {
                 return RedirectToAction(nameof(JournalistsController.Become), "Journalists");
             }
-            if (!this.data.Categories.Any(n => n.Id == aNews.CategoryId))
+            if (!this.news.CategoryExists(aNews.CategoryId))
             {
                 this.ModelState.AddModelError(nameof(aNews.CategoryId), "Category does not exist.");
             }

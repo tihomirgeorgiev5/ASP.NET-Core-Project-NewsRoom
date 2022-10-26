@@ -19,5 +19,7 @@ namespace NewsRoom.Services.News
 
         IEnumerable<string> AllAreas();
         IEnumerable<NewsCategoryServiceModel> AllCategories();
+
+        bool CategoryExists(int categoryId);
     }
 }

@@ -103,6 +103,11 @@ namespace NewsRoom.Services.News
          })
          .ToList();
 
+        public bool CategoryExists(int categoryId)
+        => this.data
+            .Categories
+            .Any(n => n.Id == categoryId);
+
         private static IEnumerable<NewsServiceModel> GetNews(IQueryable<ANews> NewsQuery)
             => NewsQuery
             .Select(n => new NewsServiceModel

@@ -1,9 +1,10 @@
 ﻿using NewsRoom.Models;
+using System;
 using System.Collections.Generic;
 
 namespace NewsRoom.Services.News
 {
-   public interface INewsService
+    public interface INewsService
     {
         NewsQueryServiceModel All(
             string area,
@@ -14,6 +15,16 @@ namespace NewsRoom.Services.News
             );
 
         NewsDetailsServiceModel Details(int id);
+
+        int Create(
+            string area,
+            string title,
+            string description,
+            string imageUrl,
+            DateTime date,
+            int categoryId,
+            int journalistId
+            );
 
         IEnumerable<NewsServiceModel> ByUser(string userId);
 

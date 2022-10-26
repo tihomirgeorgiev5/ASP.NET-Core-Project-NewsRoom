@@ -91,19 +91,15 @@ namespace NewsRoom.Controllers
                 return View(aNews);
             }
 
-            var aNewsData = new ANews
-            {
-                Area = aNews.Area,
-                Title = aNews.Title,
-                Description = aNews.Description,
-                ImageUrl = aNews.ImageUrl,
-                Date = aNews.Date,
-                CategoryId = aNews.CategoryId,
-                JournalistId = journalistId,
-            };
-
-            this.data.News.Add(aNewsData);
-            this.data.SaveChanges();
+            this.news.Create(
+               aNews.Area ,
+               aNews.Title,
+               aNews.Description,
+               aNews.ImageUrl ,
+               aNews.Date ,
+               aNews.CategoryId ,
+               journalistId 
+               );
 
             return RedirectToAction(nameof(All));
         }

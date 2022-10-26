@@ -1,6 +1,7 @@
 ﻿using NewsRoom.Data;
 using NewsRoom.Data.Models;
 using NewsRoom.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -79,6 +80,25 @@ namespace NewsRoom.Services.News
                 UserId = n.Journalist.UserId
             })
             .FirstOrDefault();
+
+        public int Create(string area, string title, string description, string imageUrl, DateTime date, int categoryId, int journalistId)
+        {
+            var aNewsData = new ANews
+            {
+                Area = area,
+                Title = title,
+                Description = description,
+                ImageUrl = imageUrl,
+                Date = date,
+                CategoryId = categoryId,
+                JournalistId = journalistId,
+            };
+
+            this.data.News.Add(aNewsData);
+            this.data.SaveChanges();
+
+            return aNewsData.Id;
+        }
 
         public IEnumerable<NewsServiceModel> ByUser(string userId)
             => GetNews(this.data

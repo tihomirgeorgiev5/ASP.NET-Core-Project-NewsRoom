@@ -75,11 +75,7 @@ namespace NewsRoom.Controllers
         [Authorize]
         public IActionResult Add (NewsFormModel aNews)
         {
-            var journalistId = this.data
-                .Journalists
-                .Where(j => j.UserId == this.User.GetId())
-                .Select(j => j.Id)
-                .FirstOrDefault();
+            var journalistId = this.journalists.GetIdByUser(this.User.GetId());
 
             if (journalistId == 0)
             {

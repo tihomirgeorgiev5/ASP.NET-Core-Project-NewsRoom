@@ -12,14 +12,12 @@ namespace NewsRoom.Controllers
     {
         private readonly INewsService news;
         private readonly IJournalistService journalists;
-        private readonly NewsRoomDbContext data;
-
-        public NewsController(INewsService news, IJournalistService journalists, NewsRoomDbContext data)
+  
+        public NewsController(INewsService news, IJournalistService journalists)
         {
             this.news = news;
             this.journalists = journalists;
-            this.data = data;
-            
+             
         }
 
 

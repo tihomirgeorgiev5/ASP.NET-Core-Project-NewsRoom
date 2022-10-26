@@ -100,14 +100,16 @@ namespace NewsRoom.Services.News
             return aNewsData.Id;
         }
 
-        public bool Edit(int id,string area, string title, string description, string imageUrl, DateTime date, int categoryId, int journalistId)
+        public bool Edit(int id,string area, string title, string description, string imageUrl, DateTime date, int categoryId)
         {
             var aNewsData = this.data.News.Find(id);
 
-            if (aNewsData.JournalistId != journalistId)
+            if (aNewsData == null)
             {
                 return false;
             }
+
+            
 
             aNewsData.Area = area;
             aNewsData.Title = title;
@@ -119,12 +121,19 @@ namespace NewsRoom.Services.News
             this.data.SaveChanges();
 
             return true;
+
+            
         }
 
         public IEnumerable<NewsServiceModel> ByUser(string userId)
             => GetNews(this.data
                 .News
                 .Where(n => n.Journalist.UserId == userId));
+
+        public bool IsByJournalist(int aNewsId, int journalistId)
+        => this.data
+            .News
+            .Any(n => n.Id == aNewsId && n.JournalistId == journalistId);
 
         public IEnumerable<string> AllAreas()
             => this.data

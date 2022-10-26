@@ -150,21 +150,21 @@ namespace NewsRoom.Controllers
                 return View(aNews);
             }
 
-           var aNewsIsEdited = this.news.Edit(
+            if (!this.news.IsByJournalist(id, journalistId))
+            {
+                return BadRequest();
+            }
+
+            this.news.Edit(
                 id,
                aNews.Area,
                aNews.Title,
                aNews.Description,
                aNews.ImageUrl,
                aNews.Date,
-               aNews.CategoryId,
-               journalistId
+               aNews.CategoryId
                );
 
-            if (!aNewsIsEdited)
-            {
-                return BadRequest();
-            }
 
             return RedirectToAction(nameof(All));
 

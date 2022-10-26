@@ -14,7 +14,7 @@ namespace NewsRoom.Services.News
             int newsPerPage
             );
 
-        NewsDetailsServiceModel Details(int id);
+        NewsDetailsServiceModel Details(int aNewsId);
 
         int Create(
             string area,
@@ -27,17 +27,18 @@ namespace NewsRoom.Services.News
             );
 
         bool Edit(
-            int id,
+            int aNewsId,
             string area,
             string title,
             string description,
             string imageUrl,
             DateTime date,
-            int categoryId,
-            int journalistId
+            int categoryId
             );
 
         IEnumerable<NewsServiceModel> ByUser(string userId);
+
+        bool IsByJournalist(int aNewsId, int journalistId);
 
         IEnumerable<string> AllAreas();
         IEnumerable<NewsCategoryServiceModel> AllCategories();

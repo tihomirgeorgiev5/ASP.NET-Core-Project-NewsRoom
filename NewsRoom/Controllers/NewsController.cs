@@ -128,8 +128,52 @@ namespace NewsRoom.Controllers
             });
 
         }
-   
-      
-       
+
+        [HttpPost]
+        [Authorize]
+
+        public IActionResult Edit(int id, NewsFormModel aNews)
+        {
+            var journalistId = this.journalists.GetIdByUser(this.User.GetId());
+
+            if (journalistId == 0)
+            {
+                return RedirectToAction(nameof(JournalistsController.Become), "Journalists");
+            }
+            if (!this.news.CategoryExists(aNews.CategoryId))
+            {
+                this.ModelState.AddModelError(nameof(aNews.CategoryId), "Category does not exist.");
+            }
+            if (!ModelState.IsValid)
+            {
+                aNews.Categories = this.news.AllCategories();
+                return View(aNews);
+            }
+
+           var aNewsIsEdited = this.news.Edit(
+                id,
+               aNews.Area,
+               aNews.Title,
+               aNews.Description,
+               aNews.ImageUrl,
+               aNews.Date,
+               aNews.CategoryId,
+               journalistId
+               );
+
+            if (!aNewsIsEdited)
+            {
+                return BadRequest();
+            }
+
+            return RedirectToAction(nameof(All));
+
+        }
+
+
+
+
+
+
     }
 }

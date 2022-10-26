@@ -100,6 +100,27 @@ namespace NewsRoom.Services.News
             return aNewsData.Id;
         }
 
+        public bool Edit(int id,string area, string title, string description, string imageUrl, DateTime date, int categoryId, int journalistId)
+        {
+            var aNewsData = this.data.News.Find(id);
+
+            if (aNewsData.JournalistId != journalistId)
+            {
+                return false;
+            }
+
+            aNewsData.Area = area;
+            aNewsData.Title = title;
+            aNewsData.Description = description;
+            aNewsData.ImageUrl = imageUrl;
+            aNewsData.Date = date;
+            aNewsData.CategoryId = categoryId;
+                   
+            this.data.SaveChanges();
+
+            return true;
+        }
+
         public IEnumerable<NewsServiceModel> ByUser(string userId)
             => GetNews(this.data
                 .News

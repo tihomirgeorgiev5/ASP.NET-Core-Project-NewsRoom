@@ -26,6 +26,17 @@ namespace NewsRoom.Services.News
             int journalistId
             );
 
+        bool Edit(
+            int id,
+            string area,
+            string title,
+            string description,
+            string imageUrl,
+            DateTime date,
+            int categoryId,
+            int journalistId
+            );
+
         IEnumerable<NewsServiceModel> ByUser(string userId);
 
         IEnumerable<string> AllAreas();

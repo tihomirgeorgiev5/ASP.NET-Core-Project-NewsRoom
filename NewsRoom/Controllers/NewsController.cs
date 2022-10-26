@@ -1,13 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NewsRoom.Data;
-using NewsRoom.Data.Models;
 using NewsRoom.Infrastructure;
 using NewsRoom.Models.News;
 using NewsRoom.Services.Journalists;
 using NewsRoom.Services.News;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace NewsRoom.Controllers
 {
@@ -102,6 +99,34 @@ namespace NewsRoom.Controllers
                );
 
             return RedirectToAction(nameof(All));
+        }
+
+        public IActionResult Edit(int id)
+        {
+            var userId = this.User.GetId();
+            if (!this.journalists.IsJournalist(userId))
+            {
+                return RedirectToAction(nameof(JournalistsController.Become), "Journalists");
+            }
+
+            var aNews = this.news.Details(id);
+
+            if (aNews.UserId != userId)
+            {
+                return Unauthorized();
+            }
+
+            return View(new NewsFormModel
+            {
+                Area = aNews.Area,
+                Title = aNews.Title,
+                Description = aNews.Description,
+                ImageUrl = aNews.ImageUrl,
+                Date = aNews.Date,
+                CategoryId = aNews.CategoryId,
+                Categories = this.news.AllCategories()
+            });
+
         }
    
       

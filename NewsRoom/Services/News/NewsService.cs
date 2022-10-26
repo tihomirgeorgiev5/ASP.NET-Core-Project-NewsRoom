@@ -75,7 +75,7 @@ namespace NewsRoom.Services.News
                 Description = n.Description,
                 ImageUrl = n.ImageUrl,
                 Date = n.Date,
-                Category = n.Category.Name,
+                CategoryName = n.Category.Name,
                 JournalistName = n.Journalist.Name,
                 UserId = n.Journalist.UserId
             })
@@ -137,7 +137,7 @@ namespace NewsRoom.Services.News
                 Title = n.Title,
                 ImageUrl = n.ImageUrl,
                 Date = n.Date,
-                Category = n.Category.Name
+                CategoryName = n.Category.Name
             })
                 .ToList();
 

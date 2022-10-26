@@ -14,6 +14,6 @@ namespace NewsRoom.Services.News
 
         public DateTime Date { get; init; }
 
-        public string Category { get; init; }
+        public string CategoryName { get; init; }
     }
 }

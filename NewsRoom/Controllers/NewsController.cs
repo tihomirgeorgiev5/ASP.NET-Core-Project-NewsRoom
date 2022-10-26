@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NewsRoom.Data;
 using NewsRoom.Infrastructure;
 using NewsRoom.Models.News;
 using NewsRoom.Services.Journalists;
@@ -70,7 +69,7 @@ namespace NewsRoom.Controllers
         [Authorize]
         public IActionResult Add (NewsFormModel aNews)
         {
-            var journalistId = this.journalists.GetIdByUser(this.User.GetId());
+            var journalistId = this.journalists.IdByUser(this.User.GetId());
 
             if (journalistId == 0)
             {
@@ -132,7 +131,7 @@ namespace NewsRoom.Controllers
 
         public IActionResult Edit(int id, NewsFormModel aNews)
         {
-            var journalistId = this.journalists.GetIdByUser(this.User.GetId());
+            var journalistId = this.journalists.IdByUser(this.User.GetId());
 
             if (journalistId == 0)
             {

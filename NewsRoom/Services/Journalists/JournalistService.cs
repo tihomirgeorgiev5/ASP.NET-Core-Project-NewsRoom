@@ -16,7 +16,7 @@ namespace NewsRoom.Services.Journalists
             .Journalists
             .Any(j => j.UserId == userId);
 
-        public int GetIdByUser(string userId)
+        public int IdByUser(string userId)
         => this.data
                 .Journalists
                 .Where(j => j.UserId == userId)

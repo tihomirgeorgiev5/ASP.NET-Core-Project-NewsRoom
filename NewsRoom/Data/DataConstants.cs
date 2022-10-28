@@ -2,6 +2,10 @@
 {
     public class DataConstants
     {
+        public class User
+        {
+            public const int FullNameMaxLength = 40;
+        }
         public class ANews
         {
             public const int AreaMaxLength = 30;

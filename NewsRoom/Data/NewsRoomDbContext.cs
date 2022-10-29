@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NewsRoom.Data.Models;
 
 namespace NewsRoom.Data
 {
-    public class NewsRoomDbContext : IdentityDbContext
+    public class NewsRoomDbContext : IdentityDbContext<User>
     {
        
         public NewsRoomDbContext(DbContextOptions<NewsRoomDbContext> options)
@@ -45,7 +44,7 @@ namespace NewsRoom.Data
 
             builder
                 .Entity<Journalist>()
-                .HasOne<IdentityUser>()
+                .HasOne<User>()
                 .WithOne()
                 .HasForeignKey<Journalist>(j => j.UserId)
                 .OnDelete(DeleteBehavior.Restrict);

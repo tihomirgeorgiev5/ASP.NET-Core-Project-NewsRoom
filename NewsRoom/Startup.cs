@@ -7,10 +7,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NewsRoom.Data;
+using NewsRoom.Data.Models;
 using NewsRoom.Infrastructure;
 using NewsRoom.Services.Journalists;
 using NewsRoom.Services.News;
 using NewsRoom.Services.Statistics;
+
 
 namespace NewsRoom
 {
@@ -33,7 +35,7 @@ namespace NewsRoom
                 .AddDatabaseDeveloperPageExceptionFilter();
              
             services
-                .AddDefaultIdentity<IdentityUser>(options =>
+                .AddDefaultIdentity<User>(options =>
                 {
                     options.Password.RequireDigit = false;
                     options.Password.RequireLowercase = false;

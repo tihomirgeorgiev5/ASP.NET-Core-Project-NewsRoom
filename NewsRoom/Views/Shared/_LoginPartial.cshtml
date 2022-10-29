@@ -1,8 +1,10 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using NewsRoom.Data.Models
 
 
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 @inject IJournalistService Journalists
 
 <ul class="navbar-nav">
@@ -12,7 +14,7 @@
         var userIsJournalist = Journalists.IsJournalist(userId);
 
         @if (userIsJournalist)
-        { 
+        {
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="Mine">My News</a>
             </li>

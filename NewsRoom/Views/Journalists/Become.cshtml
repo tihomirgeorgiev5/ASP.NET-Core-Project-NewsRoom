@@ -18,10 +18,14 @@
                 <input asp-for="PhoneNumber" class="form-control" placeholder="+359-888-888-888">
                 <span asp-validation-for="PhoneNumber" class="small text-danger"></span>
             </div>
-          
+
             <input class="btn btn-primary mt-3" type="submit" value="Save" />
         </form>
     </div>
 
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
 

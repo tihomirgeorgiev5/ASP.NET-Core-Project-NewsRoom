@@ -12,7 +12,7 @@
     {
         var userId = User.Id();
         var userIsJournalist = Journalists.IsJournalist(userId);
-        var userIsAdmin = User.IsInRole(WebConstants.AdministratorRoleName);
+        var userIsAdmin = User.IsAdmin();
 
         @if (userIsJournalist && !userIsAdmin)
         {

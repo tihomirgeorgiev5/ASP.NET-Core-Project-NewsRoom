@@ -101,14 +101,14 @@ namespace NewsRoom.Controllers
         public IActionResult Edit(int id)
         {
             var userId = this.User.Id();
-            if (!this.journalists.IsJournalist(userId))
+            if (!this.journalists.IsJournalist(userId) && !User.IsAdmin())
             {
                 return RedirectToAction(nameof(JournalistsController.Become), "Journalists");
             }
 
             var aNews = this.news.Details(id);
 
-            if (aNews.UserId != userId)
+            if (aNews.UserId != userId && !User.IsAdmin())
             {
                 return Unauthorized();
             }
@@ -133,7 +133,7 @@ namespace NewsRoom.Controllers
         {
             var journalistId = this.journalists.IdByUser(this.User.Id());
 
-            if (journalistId == 0)
+            if (journalistId == 0 && !User.IsAdmin())
             {
                 return RedirectToAction(nameof(JournalistsController.Become), "Journalists");
             }
@@ -147,7 +147,7 @@ namespace NewsRoom.Controllers
                 return View(aNews);
             }
 
-            if (!this.news.IsByJournalist(id, journalistId))
+            if (!this.news.IsByJournalist(id, journalistId) && !User.IsAdmin())
             {
                 return BadRequest();
             }

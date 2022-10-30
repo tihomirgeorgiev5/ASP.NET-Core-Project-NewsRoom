@@ -12,14 +12,15 @@
     {
         var userId = User.Id();
         var userIsJournalist = Journalists.IsJournalist(userId);
+        var userIsAdmin = User.IsInRole(WebConstants.AdministratorRoleName);
 
-        @if (userIsJournalist)
+        @if (userIsJournalist && !userIsAdmin)
         {
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="Mine">My News</a>
             </li>
         }
-        else
+        else if(!userIsAdmin)
         {
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="" asp-controller="Journalists" asp-action="Become">Become Journalist</a>

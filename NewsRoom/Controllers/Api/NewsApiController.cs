@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NewsRoom.Models.Api.News;
 using NewsRoom.Services.News;
+using NewsRoom.Services.News.Models;
 
 namespace NewsRoom.Controllers.Api
 {

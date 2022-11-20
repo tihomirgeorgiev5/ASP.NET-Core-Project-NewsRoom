@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace NewsRoom.Services.News
+namespace NewsRoom.Services.News.Models
 {
     public class NewsQueryServiceModel
     {

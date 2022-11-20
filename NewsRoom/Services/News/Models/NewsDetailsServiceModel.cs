@@ -1,4 +1,4 @@
-﻿namespace NewsRoom.Services.News
+﻿namespace NewsRoom.Services.News.Models
 {
     public class NewsDetailsServiceModel : NewsServiceModel
     

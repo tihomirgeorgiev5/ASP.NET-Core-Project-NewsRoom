@@ -1,4 +1,5 @@
 ﻿using NewsRoom.Models;
+using NewsRoom.Services.News.Models;
 using System;
 using System.Collections.Generic;
 

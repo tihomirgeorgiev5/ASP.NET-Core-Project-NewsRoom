@@ -1,12 +1,13 @@
 ﻿using NewsRoom.Data;
 using NewsRoom.Data.Models;
 using NewsRoom.Models;
+using NewsRoom.Services.News.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NewsRoom.Services.News
-{
+namespace NewsRoom.Services.News 
+{ 
     public class NewsService : INewsService
     {
         private readonly NewsRoomDbContext data;

@@ -7,7 +7,7 @@ using NewsRoom.Data.Models;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using static NewsRoom.WebConstants;
+using static NewsRoom.Areas.Admin.AdminConstants;
 
 namespace NewsRoom.Infrastructure
 {

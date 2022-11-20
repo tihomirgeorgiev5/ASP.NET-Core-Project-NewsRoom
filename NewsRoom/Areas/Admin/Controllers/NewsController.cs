@@ -1,17 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
-using static NewsRoom.Areas.Admin.AdminConstants;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace NewsRoom.Areas.Admin.Controllers
 {
-    [Area(AreaName)]
-    [Authorize(Roles = AdministratorRoleName)]
-    public class NewsController : Controller
+    
+    public class NewsController : AdminController
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Index() => View();
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NewsRoom.Infrastructure;
 using NewsRoom.Models.News;
@@ -11,11 +12,16 @@ namespace NewsRoom.Controllers
     {
         private readonly INewsService news;
         private readonly IJournalistService journalists;
+        private readonly IMapper mapper;
   
-        public NewsController(INewsService news, IJournalistService journalists)
+        public NewsController(
+            INewsService news,
+            IJournalistService journalists,
+            IMapper mapper)
         {
             this.news = news;
             this.journalists = journalists;
+            this.mapper = mapper;
              
         }
 
@@ -113,16 +119,13 @@ namespace NewsRoom.Controllers
                 return Unauthorized();
             }
 
-            return View(new NewsFormModel
-            {
-                Area = aNews.Area,
-                Title = aNews.Title,
-                Description = aNews.Description,
-                ImageUrl = aNews.ImageUrl,
-                Date = aNews.Date,
-                CategoryId = aNews.CategoryId,
-                Categories = this.news.AllCategories()
-            });
+            var aNewsForm = this.mapper.Map<NewsFormModel>(aNews);
+
+            aNewsForm.Categories = this.news.AllCategories();
+
+
+
+            return View(aNewsForm);
 
         }
 

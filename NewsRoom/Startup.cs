@@ -44,6 +44,9 @@ namespace NewsRoom
                 })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<NewsRoomDbContext>();
+
+            services.AddAutoMapper(typeof(Startup));
+
             services
                 .AddControllersWithViews(options =>
                 {

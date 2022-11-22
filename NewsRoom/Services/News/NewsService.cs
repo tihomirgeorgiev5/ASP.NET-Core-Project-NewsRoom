@@ -1,4 +1,6 @@
-﻿using NewsRoom.Data;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using NewsRoom.Data;
 using NewsRoom.Data.Models;
 using NewsRoom.Models;
 using NewsRoom.Services.News.Models;
@@ -11,8 +13,14 @@ namespace NewsRoom.Services.News
     public class NewsService : INewsService
     {
         private readonly NewsRoomDbContext data;
-        public NewsService(NewsRoomDbContext data)
-            => this.data = data;
+        private readonly IMapper mapper;
+        public NewsService(
+            NewsRoomDbContext data,
+            IMapper mapper)
+        {
+            this.data = data;
+            this.mapper = mapper;
+        }
 
 
         public NewsQueryServiceModel All(
@@ -68,19 +76,7 @@ namespace NewsRoom.Services.News
         => this.data
             .News
             .Where(n => n.Id == id)
-            .Select(n => new NewsDetailsServiceModel
-            {
-                Id = n.Id,
-                Area = n.Area,
-                Title = n.Title,
-                Description = n.Description,
-                ImageUrl = n.ImageUrl,
-                CategoryId = n.CategoryId,
-                Date = n.Date,
-                CategoryName = n.Category.Name,
-                JournalistName = n.Journalist.Name,
-                UserId = n.Journalist.UserId
-            })
+            .ProjectTo<NewsDetailsServiceModel>(this.mapper.ConfigurationProvider)
             .FirstOrDefault();
 
         public int Create(string area, string title, string description, string imageUrl, DateTime date, int categoryId, int journalistId)

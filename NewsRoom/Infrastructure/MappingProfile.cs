@@ -12,6 +12,9 @@ namespace NewsRoom.Infrastructure
         {
             this.CreateMap<ANews, NewsIndexViewModel>();
             this.CreateMap<NewsDetailsServiceModel, NewsFormModel>();
+
+            this.CreateMap<ANews, NewsDetailsServiceModel>()
+                .ForMember(n => n.UserId, cfg => cfg.MapFrom(n => n.Journalist.UserId));
         }
     }
 }

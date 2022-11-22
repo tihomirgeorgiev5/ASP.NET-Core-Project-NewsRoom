@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.Mvc;
 using NewsRoom.Data;
 using NewsRoom.Models;
 using NewsRoom.Models.Home;
@@ -11,29 +13,26 @@ namespace NewsRoom.Controllers
     public class HomeController : Controller
     {
         private readonly IStatisticsService statistics;
+        private readonly IMapper mapper;
         private readonly NewsRoomDbContext data;
 
         public HomeController(
             IStatisticsService statistics,
+             IMapper mapper,
             NewsRoomDbContext data)
         {
             this.statistics = statistics;
+            this.mapper = mapper;
             this.data = data;
+            
         }
-        
+
         public IActionResult Index()
         {
             var news = this.data
                .News
                .OrderByDescending(n => n.Id)
-               .Select(n => new NewsIndexViewModel
-               {
-                   Id = n.Id,
-                   Area = n.Area,
-                   Title = n.Title,
-                   ImageUrl = n.ImageUrl,
-                   Date = n.Date,  
-               })
+               .ProjectTo<NewsIndexViewModel>(this.mapper.ConfigurationProvider)
                .Take(3)
                .ToList();
 

@@ -75,6 +75,7 @@ namespace NewsRoom.Services.News
                 Title = n.Title,
                 Description = n.Description,
                 ImageUrl = n.ImageUrl,
+                CategoryId = n.CategoryId,
                 Date = n.Date,
                 CategoryName = n.Category.Name,
                 JournalistName = n.Journalist.Name,

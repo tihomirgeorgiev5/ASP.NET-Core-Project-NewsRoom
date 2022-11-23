@@ -13,13 +13,13 @@ namespace NewsRoom.Services.News
     public class NewsService : INewsService
     {
         private readonly NewsRoomDbContext data;
-        private readonly IMapper mapper;
+        private readonly IConfigurationProvider mapper;
         public NewsService(
             NewsRoomDbContext data,
             IMapper mapper)
         {
             this.data = data;
-            this.mapper = mapper;
+            this.mapper = mapper.ConfigurationProvider;
         }
 
 
@@ -76,7 +76,7 @@ namespace NewsRoom.Services.News
         => this.data
             .News
             .Where(n => n.Id == id)
-            .ProjectTo<NewsDetailsServiceModel>(this.mapper.ConfigurationProvider)
+            .ProjectTo<NewsDetailsServiceModel>(this.mapper)
             .FirstOrDefault();
 
         public int Create(string area, string title, string description, string imageUrl, DateTime date, int categoryId, int journalistId)

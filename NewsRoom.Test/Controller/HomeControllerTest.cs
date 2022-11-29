@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NewsRoom.Controllers;
+using NewsRoom.Test.Mocks;
 using Xunit;
 
 namespace NewsRoom.Test.Controller
@@ -9,7 +10,7 @@ namespace NewsRoom.Test.Controller
         public void ErrorShouldReturnView()
         {
             // Arrange
-            var homeController = new HomeController(null, null, null);
+            var homeController = new HomeController(null, MapperMock.Instance, null);
 
             // Act
             var result = homeController.Error();

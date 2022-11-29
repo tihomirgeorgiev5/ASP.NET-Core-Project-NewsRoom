@@ -18,7 +18,7 @@ namespace NewsRoom.Test.Mocks
                 return mapperMock.Object;
             }
 
-
+              
         }
     }
 }

@@ -24,8 +24,4 @@
     <ProjectReference Include="..\NewsRoom\NewsRoom.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Mochs\" />
-  </ItemGroup>
-
 </Project>

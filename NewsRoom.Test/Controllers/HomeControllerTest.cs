@@ -4,7 +4,7 @@ using Moq;
 using NewsRoom.Controllers;
 using Xunit;
 
-namespace NewsRoom.Test.Controller
+namespace NewsRoom.Test.Controllers
 {
     public class HomeControllerTest
     {
@@ -12,7 +12,10 @@ namespace NewsRoom.Test.Controller
         public void ErrorShouldReturnView()
         {
             // Arrange
-            var homeController = new HomeController(null, Mock.Of<IMapper>(), null);
+            var homeController = new HomeController(
+                null,
+                Mock.Of<IMapper>(),
+                 null);
 
             // Act
             var result = homeController.Error();

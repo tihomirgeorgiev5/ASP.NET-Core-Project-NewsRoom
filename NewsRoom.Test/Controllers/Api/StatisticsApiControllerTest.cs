@@ -15,7 +15,11 @@ namespace NewsRoom.Test.Controllers.Api
             // Act
             var result = statisticsController.GetStatistics();
 
-            
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(5, result.TotalNews);
+            Assert.Equal(10, result.TotalWriters);
+            Assert.Equal(15, result.TotalReaders);
         }
     }
 }

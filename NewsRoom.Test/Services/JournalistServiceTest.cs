@@ -1,6 +1,15 @@
-﻿namespace NewsRoom.Test.Services
+﻿using NewsRoom.Services.Journalists;
+using Xunit;
+
+namespace NewsRoom.Test.Services
 {
-    class JournalistServiceTest
+    public class JournalistServiceTest
     {
+        [Fact]
+        public void IsJournalistShouldReturnTrueWhenUserIsJournalist()
+        {
+            // Arrange
+            //var journalistService = new JournalistService()
+        }
     }
 }

@@ -12,6 +12,7 @@ namespace NewsRoom.Test.Controller
             var homeController = new HomeController(null, null, null);
 
             // Act
+            var result = homeController.Error();
 
             // Assert
         }

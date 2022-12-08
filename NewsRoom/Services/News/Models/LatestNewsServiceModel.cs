@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace NewsRoom.Models.Home
+namespace NewsRoom.Services.News.Models
 {
-    public class NewsIndexViewModel
+    public class LatestNewsServiceModel
     {
         public int Id { get; init; }
         public string Area { get; init; }

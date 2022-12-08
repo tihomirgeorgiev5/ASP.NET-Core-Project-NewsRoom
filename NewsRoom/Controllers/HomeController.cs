@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using NewsRoom.Data;
-using NewsRoom.Models;
 using NewsRoom.Models.Home;
+using NewsRoom.Services.News.Models;
 using NewsRoom.Services.Statistics;
-using System.Diagnostics;
 using System.Linq;
 
 namespace NewsRoom.Controllers
@@ -33,7 +31,7 @@ namespace NewsRoom.Controllers
             var news = this.data
                .News
                .OrderByDescending(n => n.Id)
-               .ProjectTo<NewsIndexViewModel>(this.mapper)
+               .ProjectTo<LatestNewsServiceModel>(this.mapper)
                .Take(3)
                .ToList();
 

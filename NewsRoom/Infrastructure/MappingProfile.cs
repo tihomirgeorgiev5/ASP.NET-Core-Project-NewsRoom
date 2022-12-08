@@ -10,7 +10,7 @@ namespace NewsRoom.Infrastructure
     {
         public MappingProfile()
         {
-            this.CreateMap<ANews, NewsIndexViewModel>();
+            this.CreateMap<ANews, LatestNewsServiceModel>();
             this.CreateMap<NewsDetailsServiceModel, NewsFormModel>();
 
             this.CreateMap<ANews, NewsDetailsServiceModel>()

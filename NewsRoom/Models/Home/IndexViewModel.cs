@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using NewsRoom.Services.News.Models;
 using System.Collections.Generic;
 
 namespace NewsRoom.Models.Home
@@ -11,6 +11,6 @@ namespace NewsRoom.Models.Home
 
         public int TotalWriters { get; init; }
 
-        public List<NewsIndexViewModel> News { get; init; }
+        public List<LatestNewsServiceModel> News { get; init; }
     }
 }

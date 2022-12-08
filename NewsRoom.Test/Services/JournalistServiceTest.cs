@@ -12,7 +12,7 @@ namespace NewsRoom.Test.Services
         public void IsJournalistShouldReturnTrueWhenUserIsJournalist()
         {
             // Arrange
-            var journalistService = this.GetJournalistService();
+            var journalistService = GetJournalistService();
 
             // Act
             var result = journalistService.IsJournalist(UserId);
@@ -25,7 +25,7 @@ namespace NewsRoom.Test.Services
         public void IsJournalistShouldReturnFalseWhenUserIsNotJournalist()
         {
             // Arrange
-            var journalistService = this.GetJournalistService();
+            var journalistService = GetJournalistService();
 
             // Act
             var result = journalistService.IsJournalist("AnotherUserId");
@@ -34,7 +34,7 @@ namespace NewsRoom.Test.Services
             Assert.False(result);
         }
 
-        private IJournalistService GetJournalistService()
+        private static IJournalistService GetJournalistService()
         {
             
             var data = DatabaseMock.Instance;

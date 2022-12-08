@@ -7,6 +7,7 @@ namespace NewsRoom.Test
         [Fact]
         public void Test1()
         {
+            Assert.Equal("2", 2.ToString());
 
         }
     }

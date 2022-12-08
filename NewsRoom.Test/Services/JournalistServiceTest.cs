@@ -1,5 +1,4 @@
-﻿using NewsRoom.Data;
-using NewsRoom.Data.Models;
+﻿using NewsRoom.Data.Models;
 using NewsRoom.Services.Journalists;
 using NewsRoom.Test.Mocks;
 using Xunit;
@@ -13,9 +12,7 @@ namespace NewsRoom.Test.Services
         public void IsJournalistShouldReturnTrueWhenUserIsJournalist()
         {
             // Arrange
-            using var data = this.GetJournalistData();
-            
-            var journalistService = new JournalistService(data);
+            var journalistService = this.GetJournalistService();
 
             // Act
             var result = journalistService.IsJournalist(UserId);
@@ -28,9 +25,7 @@ namespace NewsRoom.Test.Services
         public void IsJournalistShouldReturnFalseWhenUserIsNotJournalist()
         {
             // Arrange
-           using var data = this.GetJournalistData();
-
-            var journalistService = new JournalistService(data);
+            var journalistService = this.GetJournalistService();
 
             // Act
             var result = journalistService.IsJournalist("AnotherUserId");
@@ -39,7 +34,7 @@ namespace NewsRoom.Test.Services
             Assert.False(result);
         }
 
-        private NewsRoomDbContext GetJournalistData()
+        private IJournalistService GetJournalistService()
         {
             
             var data = DatabaseMock.Instance;
@@ -51,7 +46,7 @@ namespace NewsRoom.Test.Services
 
             data.SaveChanges();
 
-            return data;
+            return new JournalistService(data);
         }
     }
 }

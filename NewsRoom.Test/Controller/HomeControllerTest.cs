@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using NewsRoom.Controllers;
+using Xunit;
 
 namespace NewsRoom.Test.Controller
 {
@@ -8,6 +9,7 @@ namespace NewsRoom.Test.Controller
         public void ErrorShouldReturnView()
         {
             // Arrange
+            var homeController = new HomeController(null, null, null);
 
             // Act
 

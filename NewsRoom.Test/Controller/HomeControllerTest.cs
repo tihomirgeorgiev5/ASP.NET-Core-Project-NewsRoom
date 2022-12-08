@@ -12,7 +12,11 @@ namespace NewsRoom.Test.Controller
         public void ErrorShouldReturnView()
         {
             // Arrange
+<<<<<<< HEAD
             var homeController = new HomeController(null, Mock.Of<IMapper>(), null);
+=======
+            var homeController = new HomeController(null, null, null);
+>>>>>>> parent of ed9ef71 (added MapperMock.Instance in HomeControllerTest)
 
             // Act
             var result = homeController.Error();

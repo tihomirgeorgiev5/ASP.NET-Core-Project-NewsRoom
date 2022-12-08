@@ -13,7 +13,7 @@ namespace NewsRoom.Test
         [Theory]
         [InlineData(1, 2, 3)]
         [InlineData(2, 3, 5)]
-        [InlineData(5, 6, 11)]
+        [InlineData(5, 6, 10)]
         public void Test2(int x, int y, int sum)
         {
             Assert.Equal(sum, x + y);

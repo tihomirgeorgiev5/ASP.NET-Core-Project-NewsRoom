@@ -72,6 +72,14 @@ namespace NewsRoom.Services.News
 
         }
 
+        public IEnumerable<LatestNewsServiceModel> Latest()
+          => this.data
+             .News
+             .OrderByDescending(n => n.Id)
+             .ProjectTo<LatestNewsServiceModel>(this.mapper)
+             .Take(3)
+             .ToList();
+
         public NewsDetailsServiceModel Details(int id)
         => this.data
             .News
@@ -169,6 +177,7 @@ namespace NewsRoom.Services.News
             })
                 .ToList();
 
-       
+      
+
     }
 }

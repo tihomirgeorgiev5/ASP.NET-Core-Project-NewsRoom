@@ -15,6 +15,8 @@ namespace NewsRoom.Services.News
             int newsPerPage
             );
 
+        IEnumerable<LatestNewsServiceModel> Latest();
+
         NewsDetailsServiceModel Details(int aNewsId);
 
         int Create(

@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using Moq;
+﻿using Microsoft.AspNetCore.Mvc;
 using NewsRoom.Controllers;
 using Xunit;
 
@@ -14,7 +12,6 @@ namespace NewsRoom.Test.Controllers
             // Arrange
             var homeController = new HomeController(
                 null,
-                Mock.Of<IMapper>(),
                  null);
 
             // Act

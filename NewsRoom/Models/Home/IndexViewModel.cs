@@ -11,6 +11,6 @@ namespace NewsRoom.Models.Home
 
         public int TotalWriters { get; init; }
 
-        public List<LatestNewsServiceModel> News { get; init; }
+        public IList<LatestNewsServiceModel> News { get; init; }
     }
 }

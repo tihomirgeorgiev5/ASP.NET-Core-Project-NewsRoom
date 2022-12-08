@@ -1,9 +1,6 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Microsoft.AspNetCore.Mvc;
-using NewsRoom.Data;
+﻿using Microsoft.AspNetCore.Mvc;
 using NewsRoom.Models.Home;
-using NewsRoom.Services.News.Models;
+using NewsRoom.Services.News;
 using NewsRoom.Services.Statistics;
 using System.Linq;
 
@@ -11,29 +8,22 @@ namespace NewsRoom.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly INewsService news;
         private readonly IStatisticsService statistics;
-        private readonly AutoMapper.IConfigurationProvider mapper;
-        private readonly NewsRoomDbContext data;
+
+        
 
         public HomeController(
-            IStatisticsService statistics,
-             IMapper mapper,
-            NewsRoomDbContext data)
+            INewsService news,
+            IStatisticsService statistics)
         {
+            this.news = news;
             this.statistics = statistics;
-            this.mapper = mapper.ConfigurationProvider;
-            this.data = data;
-            
         }
 
         public IActionResult Index()
         {
-            var news = this.data
-               .News
-               .OrderByDescending(n => n.Id)
-               .ProjectTo<LatestNewsServiceModel>(this.mapper)
-               .Take(3)
-               .ToList();
+            var latestNews = this.news.Latest();
 
             var totalStatistics = this.statistics.Total();
 
@@ -41,7 +31,7 @@ namespace NewsRoom.Controllers
             { 
                 TotalNews = totalStatistics.TotalNews,
                 TotalReaders = totalStatistics.TotalReaders,
-                News = news,
+                News = latestNews.ToList()
             });
         }
         

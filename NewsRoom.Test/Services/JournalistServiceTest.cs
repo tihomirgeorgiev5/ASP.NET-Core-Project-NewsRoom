@@ -1,4 +1,6 @@
-﻿using NewsRoom.Services.Journalists;
+﻿using NewsRoom.Data.Models;
+using NewsRoom.Services.Journalists;
+using NewsRoom.Test.Mocks;
 using Xunit;
 
 namespace NewsRoom.Test.Services
@@ -9,7 +11,16 @@ namespace NewsRoom.Test.Services
         public void IsJournalistShouldReturnTrueWhenUserIsJournalist()
         {
             // Arrange
-            //var journalistService = new JournalistService()
+            using var data = DatabaseMock.Instance;
+
+            data.Journalists.Add(new Journalist
+            {
+                UserId = "TestUserId"
+            });
+
+            data.SaveChanges();
+
+            var journalistService = new JournalistService(data);
         }
     }
 }

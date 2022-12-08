@@ -11,16 +11,23 @@ namespace NewsRoom.Test.Services
         public void IsJournalistShouldReturnTrueWhenUserIsJournalist()
         {
             // Arrange
+            const string userId = "TestUserId";
             using var data = DatabaseMock.Instance;
 
             data.Journalists.Add(new Journalist
             {
-                UserId = "TestUserId"
+                UserId = userId
             });
 
             data.SaveChanges();
 
             var journalistService = new JournalistService(data);
+
+            // Act
+            var result = journalistService.IsJournalist(userId);
+
+            // Assert
+            Assert.True(result);
         }
     }
 }

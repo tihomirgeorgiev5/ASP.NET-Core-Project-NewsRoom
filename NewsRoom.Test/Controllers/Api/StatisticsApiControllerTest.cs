@@ -11,6 +11,11 @@ namespace NewsRoom.Test.Controllers.Api
         {
             // Arrange
             var statisticsController = new StatisticsApiController(StatisticsServiceMock.Instance);
+
+            // Act
+            var result = statisticsController.GetStatistics();
+
+            
         }
     }
 }

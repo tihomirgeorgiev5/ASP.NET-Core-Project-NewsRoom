@@ -1,4 +1,5 @@
-﻿using NewsRoom.Controllers;
+﻿using Microsoft.AspNetCore.Mvc;
+using NewsRoom.Controllers;
 using Xunit;
 
 namespace NewsRoom.Test.Controller
@@ -16,6 +17,7 @@ namespace NewsRoom.Test.Controller
 
             // Assert
             Assert.NotNull(result);
+            Assert.IsType<ViewResult>(result);
             
         }
 

@@ -29,5 +29,28 @@ namespace NewsRoom.Test.Services
             // Assert
             Assert.True(result);
         }
+
+        [Fact]
+        public void IsJournalistShouldReturnFalseWhenUserIsNotJournalist()
+        {
+            // Arrange
+            
+            using var data = DatabaseMock.Instance;
+
+            data.Journalists.Add(new Journalist
+            {
+                UserId = "TestUserId"
+            });
+
+            data.SaveChanges();
+
+            var journalistService = new JournalistService(data);
+
+            // Act
+            var result = journalistService.IsJournalist("AnotherUserId");
+
+            // Assert
+            Assert.False(result);
+        }
     }
 }

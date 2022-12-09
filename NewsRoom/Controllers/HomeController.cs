@@ -23,7 +23,9 @@ namespace NewsRoom.Controllers
 
         public IActionResult Index()
         {
-            var latestNews = this.news.Latest();
+            var latestNews = this.news
+                .Latest()
+                .ToList();
 
             var totalStatistics = this.statistics.Total();
 
@@ -31,7 +33,7 @@ namespace NewsRoom.Controllers
             { 
                 TotalNews = totalStatistics.TotalNews,
                 TotalReaders = totalStatistics.TotalReaders,
-                News = latestNews.ToList()
+                News = latestNews
             });
         }
         

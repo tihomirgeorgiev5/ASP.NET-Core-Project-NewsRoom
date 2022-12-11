@@ -20,7 +20,7 @@ namespace NewsRoom.Test.Controllers
         {
             MyMvc
                 .Pipeline()
-                .ShouldMap("/")
+                .ShouldMap("/Error")
                 .To<HomeController>(n => n.Index())
                 .Which(controller => controller
                       .WithData(GetNews()))

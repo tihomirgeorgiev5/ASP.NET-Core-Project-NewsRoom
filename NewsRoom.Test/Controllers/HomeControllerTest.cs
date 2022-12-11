@@ -18,10 +18,13 @@ namespace NewsRoom.Test.Controllers
         [Fact]
         public void IndexShouldReturnViewWithCorrectModelAndData()
         {
+            // Arrange
             MyController<HomeController>
                 .Instance(controller => controller
                 .WithData(GetNews()))
+            // Act
                 .Calling(n => n.Index())
+            // Assert
                 .ShouldReturn()
                 .View(view => view.WithModelOfType<IndexViewModel>()
                 .Passing(m => m.News.Should().HaveCount(3)));

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using FluentAssertions;
+using MyTested.AspNetCore.Mvc;
 using NewsRoom.Controllers;
 using NewsRoom.Data.Models;
 using NewsRoom.Models.Home;
@@ -8,11 +9,24 @@ using NewsRoom.Services.Statistics;
 using NewsRoom.Test.Mocks;
 using System.Linq;
 using Xunit;
+using System.Collections.Generic;
 
 namespace NewsRoom.Test.Controllers
 {
     public class HomeControllerTest
     {
+        [Fact]
+        public void IndexShouldReturnViewWithCorrectModelAndData()
+        {
+            MyController<HomeController>
+                .Instance(controller => controller
+                .WithData(GetNews()))
+                .Calling(n => n.Index())
+                .ShouldReturn()
+                .View(view => view.WithModelOfType<IndexViewModel>()
+                .Passing(m => m.News.Should().HaveCount(3)));
+        }
+
         [Fact]
         public void IndexShouldReturnViewWithCorrectModel()
         {
@@ -82,6 +96,9 @@ namespace NewsRoom.Test.Controllers
             Assert.IsType<ViewResult>(result);
             
         }
+
+        private static IEnumerable<ANews> GetNews()
+            => Enumerable.Range(0, 10).Select(i => new ANews());
 
     }
 }

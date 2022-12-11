@@ -20,7 +20,12 @@ namespace NewsRoom.Test.Controllers
             var data = DatabaseMock.Instance;
             var mapper = MapperMock.Instance;
 
-            data.News.AddRange(Enumerable.Range(0, 10).Select(i => new ANews()));
+            var news = Enumerable
+                .Range(0, 10)
+                .Select(i => new ANews());
+
+            data.News.AddRange(news);
+            data.Users.Add(new User());
             data.SaveChanges();
 
             var newsService = new NewsService(data, mapper);
@@ -39,6 +44,10 @@ namespace NewsRoom.Test.Controllers
             var model = viewResult.Model;
 
             var indexViewModel = Assert.IsType<IndexViewModel>(model);
+
+            Assert.Equal(3, indexViewModel.News.Count);
+            Assert.Equal(10, indexViewModel.TotalNews);
+            Assert.Equal(1, indexViewModel.TotalReaders);
         }
         [Fact]
         public void ErrorShouldReturnView()

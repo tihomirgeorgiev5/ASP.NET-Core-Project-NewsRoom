@@ -57,12 +57,12 @@ namespace NewsRoom.Test.Controllers
                .Which
                .Model
                .As<IndexViewModel>()
-               .Should()
-               .Match((IndexViewModel r) => r.News.Count == 3)
-               .And
-               .Match((IndexViewModel r) => r.TotalNews == 10)
-               .And
-               .Match((IndexViewModel r) => r.TotalReaders == 1);
+               .Invoking(model =>
+               {
+                   model.News.Should().HaveCount(3);
+                   model.TotalNews.Should().Be(10);
+                   model.TotalReaders.Should().Be(1);
+               });
 
         }
         [Fact]

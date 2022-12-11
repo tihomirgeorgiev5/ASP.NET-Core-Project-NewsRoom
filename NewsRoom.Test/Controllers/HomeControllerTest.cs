@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using FluentAssertions;
 using NewsRoom.Controllers;
 using NewsRoom.Data.Models;
 using NewsRoom.Models.Home;
@@ -35,8 +36,9 @@ namespace NewsRoom.Test.Controllers
             // Act
             var result = homeController.Index();
 
+
             // Assert
-            Assert.NotNull(result);
+            /* Assert.NotNull(result);
 
             var viewResult = Assert.IsType<ViewResult>(result);
 
@@ -46,7 +48,22 @@ namespace NewsRoom.Test.Controllers
 
             Assert.Equal(3, indexViewModel.News.Count);
             Assert.Equal(10, indexViewModel.TotalNews);
-            Assert.Equal(1, indexViewModel.TotalReaders);
+            Assert.Equal(1, indexViewModel.TotalReaders); */
+
+            result
+               .Should()
+               .NotBeNull()
+               .And.BeAssignableTo<ViewResult>()
+               .Which
+               .Model
+               .As<IndexViewModel>()
+               .Should()
+               .Match((IndexViewModel r) => r.News.Count == 3)
+               .And
+               .Match((IndexViewModel r) => r.TotalNews == 10)
+               .And
+               .Match((IndexViewModel r) => r.TotalReaders == 1);
+
         }
         [Fact]
         public void ErrorShouldReturnView()

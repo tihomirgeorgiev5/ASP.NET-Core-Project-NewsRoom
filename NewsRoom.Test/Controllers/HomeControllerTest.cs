@@ -59,7 +59,7 @@ namespace NewsRoom.Test.Controllers
                .As<IndexViewModel>()
                .Invoking(model =>
                {
-                   model.News.Should().HaveCount(4);
+                   model.News.Should().HaveCount(3);
                    model.TotalNews.Should().Be(10);
                    model.TotalReaders.Should().Be(1);
                })

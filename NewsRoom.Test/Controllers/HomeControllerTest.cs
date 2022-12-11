@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using NewsRoom.Controllers;
 using NewsRoom.Data.Models;
 using NewsRoom.Models.Home;

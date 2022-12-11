@@ -12,7 +12,7 @@ namespace NewsRoom.Test.Controllers
             => this.factory = factory;
 
         [Fact]
-        public async Task IndexShouldReturnCorrectResult()
+        public async Task IndexShouldReturnCorrectStatusCode()
         {
             // Arrange
             var client = this.factory.CreateClient();

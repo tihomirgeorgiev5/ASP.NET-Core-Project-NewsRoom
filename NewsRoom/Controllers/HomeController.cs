@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using NewsRoom.Models.Home;
 using NewsRoom.Services.News;
 using NewsRoom.Services.Statistics;
@@ -10,15 +11,18 @@ namespace NewsRoom.Controllers
     {
         private readonly INewsService news;
         private readonly IStatisticsService statistics;
+        private readonly IMemoryCache cache;
 
         
 
         public HomeController(
             INewsService news,
-            IStatisticsService statistics)
+            IStatisticsService statistics,
+            IMemoryCache cache)
         {
             this.news = news;
             this.statistics = statistics;
+            this.cache = cache;
         }
 
         public IActionResult Index()

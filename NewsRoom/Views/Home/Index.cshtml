@@ -1,10 +1,10 @@
-﻿@model IndexViewModel
+﻿@model List<LatestNewsServiceModel>
 @{
     ViewBag.Title = "Welcome!";
 }
 
 @{
-    var news = Model.News;
+    var news = Model;
 
     var firstNews = news.Any() ? news[0] : null;
 

@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
-using NewsRoom.Models.Home;
 using NewsRoom.Services.News;
 using NewsRoom.Services.News.Models;
-using NewsRoom.Services.Statistics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,18 +11,15 @@ namespace NewsRoom.Controllers
     public class HomeController : Controller
     {
         private readonly INewsService news;
-        private readonly IStatisticsService statistics;
         private readonly IMemoryCache cache;
 
         
 
         public HomeController(
             INewsService news,
-            IStatisticsService statistics,
             IMemoryCache cache)
         {
             this.news = news;
-            this.statistics = statistics;
             this.cache = cache;
         }
 
@@ -45,16 +40,8 @@ namespace NewsRoom.Controllers
 
                 this.cache.Set(latestNewsCacheKey, latestNews, cacheOptions);
             }
-            
 
-            var totalStatistics = this.statistics.Total();
-
-            return View(new IndexViewModel 
-            { 
-                TotalNews = totalStatistics.TotalNews,
-                TotalReaders = totalStatistics.TotalReaders,
-                News = latestNews
-            });
+            return View(latestNews);
         }
         
        

@@ -2,7 +2,10 @@
 using Microsoft.Extensions.Caching.Memory;
 using NewsRoom.Models.Home;
 using NewsRoom.Services.News;
+using NewsRoom.Services.News.Models;
 using NewsRoom.Services.Statistics;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace NewsRoom.Controllers
@@ -27,9 +30,22 @@ namespace NewsRoom.Controllers
 
         public IActionResult Index()
         {
-            var latestNews = this.news
+            const string latestNewsCacheKey = "LatestNewsCacheKey";
+
+            var latestNews = this.cache.Get<List<LatestNewsServiceModel>>(latestNewsCacheKey);
+
+            if (latestNews == null)
+            {
+                latestNews = this.news
                 .Latest()
                 .ToList();
+
+                var cacheOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(15));
+
+                this.cache.Set(latestNewsCacheKey, latestNews, cacheOptions);
+            }
+            
 
             var totalStatistics = this.statistics.Total();
 

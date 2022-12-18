@@ -53,6 +53,13 @@ namespace NewsRoom.Controllers
             return View(myNews);
         }
 
+        public IActionResult Details(int id, string information)
+        {
+            var aNews = this.news.Details(id);
+
+            return View(aNews);
+        }
+
         [Authorize]
         public IActionResult Add()
         {

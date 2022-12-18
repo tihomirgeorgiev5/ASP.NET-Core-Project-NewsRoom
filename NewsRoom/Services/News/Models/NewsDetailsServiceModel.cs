@@ -7,6 +7,8 @@
 
         public int CategoryId { get; init; }
 
+        public string CategoryName { get; init; }
+
         public int JournalistId { get; init; }
 
         public string JournalistName { get; init; }

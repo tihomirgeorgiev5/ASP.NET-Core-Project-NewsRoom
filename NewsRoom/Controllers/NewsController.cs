@@ -57,6 +57,11 @@ namespace NewsRoom.Controllers
         {
             var aNews = this.news.Details(id);
 
+            if (information != aNews.ToFriendlyUrl())
+            {
+                return BadRequest();
+            }
+
             return View(aNews);
         }
 

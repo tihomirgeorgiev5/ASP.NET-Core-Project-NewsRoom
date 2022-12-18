@@ -36,7 +36,7 @@
             <div class="carousel-item active">
                 <img src="@firstNews.ImageUrl" class="d-block w-100" alt="@firstNews.Area => @firstNews.Title">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5><a class="btn btn-primary" asp-controller="News" asp-action="Details" asp-route-id="@firstNews.Id" asp-route-informaton="@(firstNews.Area + " " + firstNews.Title)">@firstNews.Area => @firstNews.Title</a></h5>
+                    <h5><a class="btn btn-primary" asp-controller="News" asp-action="Details" asp-route-id="@firstNews.Id" asp-route-informaton="@firstNews.ToFriendlyUrl()">@firstNews.Area => @firstNews.Title</a></h5>
                 </div>
             </div>
         }

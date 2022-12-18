@@ -2,7 +2,7 @@
 
 namespace NewsRoom.Services.News.Models
 {
-    public class NewsServiceModel
+    public class NewsServiceModel : INewsModel
     {
        
         public int Id { get; init; }

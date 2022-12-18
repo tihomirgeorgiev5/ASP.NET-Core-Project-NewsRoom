@@ -8,7 +8,7 @@
                     <img src="@aNews.ImageUrl" class="card-img-top" alt="@aNews.Area => @aNews.Title - @aNews.Date (@aNews.CategoryName)">
                     <div class="card-body text-center">
                         <h5 class="card-title text-center">@aNews.Area => @aNews.Title (@aNews.Date)</h5>
-                        <a asp-controller="News" asp-action="Details" asp-route-id="@aNews.Id" asp-route-information="@(aNews.Area + " " + @aNews.Title)" class="btn btn-primary">View</a>
+                        <a asp-controller="News" asp-action="Details" asp-route-id="@aNews.Id" asp-route-information="@aNews.ToFriendlyUrl()" class="btn btn-primary">View</a>
                         @if (ViewBag.AllowNewsEdit == true || User.IsAdmin())
                         {
                             <a asp-controller="News" asp-action="Edit" asp-route-id="@aNews.Id" class="btn btn-warning">Edit</a>

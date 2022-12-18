@@ -5,3 +5,31 @@
 }
 
 <h1>All News</h1>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Area</th>
+            <th scope="col">Title</th>
+            <th scope="col">Category</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var aNews in Model)
+         {
+           <tr>
+               <td scope="col">@aNews.Id</td>
+               <td scope="col">@aNews.Area</td>
+               <td scope="col">@aNews.Title</td>
+               <td scope="col">@aNews.CategoryName</td>
+               <td scope="col">
+                   <a asp-controller="News" asp-action="Details" asp-route-id="@aNews.Id" asp-route-information="@aNews.ToFriendlyUrl()" class="btn btn-primary">View</a>
+                   <a asp-controller="News" asp-action="Edit" asp-route-id="@aNews.Id" class="btn btn-warning">Edit</a>
+                   <a asp-controller="News" asp-action="Delete" asp-route-id="@aNews.Id" class="btn btn-danger">Delete</a>
+               </td>
+           </tr>
+         }
+    </tbody>
+</table>

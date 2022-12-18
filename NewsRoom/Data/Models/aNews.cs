@@ -24,6 +24,8 @@ namespace NewsRoom.Data.Models
         public string ImageUrl { get; set; }
         public DateTime Date { get; set; }
 
+        public bool IsPublic { get; set; }
+
         public int CategoryId { get; set; }
 
         public Category Category { get; init; }

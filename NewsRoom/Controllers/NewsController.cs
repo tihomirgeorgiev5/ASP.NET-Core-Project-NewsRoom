@@ -103,7 +103,7 @@ namespace NewsRoom.Controllers
                 return View(aNews);
             }
 
-            this.news.Create(
+            var newsId = this.news.Create(
                aNews.Area ,
                aNews.Title,
                aNews.Description,
@@ -113,7 +113,7 @@ namespace NewsRoom.Controllers
                journalistId 
                );
 
-            return RedirectToAction(nameof(All));
+            return RedirectToAction(nameof(Details), new { id = newsId, information = aNews.ToFriendlyUrl()});
         }
 
         public IActionResult Edit(int id)
@@ -177,8 +177,10 @@ namespace NewsRoom.Controllers
                aNews.CategoryId
                );
 
+            //TempData[GlobalMessageKey] = "Your news was edited!";
 
-            return RedirectToAction(nameof(All));
+
+            return RedirectToAction(nameof(Details), new { id, information = aNews.ToFriendlyUrl() });
 
         }
 

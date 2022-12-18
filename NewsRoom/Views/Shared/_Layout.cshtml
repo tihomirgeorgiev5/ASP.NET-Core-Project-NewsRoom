@@ -18,12 +18,19 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        @if(!User.IsAdmin())
+                        @if (!User.IsAdmin())
                         {
 
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="Add">Add News</a>
                             </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="News" asp-action="All">Administration</a>
+                            </li>
+
                         }
 
                         <li class="nav-item">

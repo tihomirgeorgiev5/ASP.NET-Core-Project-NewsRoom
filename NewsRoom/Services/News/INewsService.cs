@@ -8,11 +8,12 @@ namespace NewsRoom.Services.News
     public interface INewsService
     {
         NewsQueryServiceModel All(
-            string area,
-            string searchTerm,
-            NewsSorting newsSorting,
-            int currentPage,
-            int newsPerPage
+            string area = null,
+            string searchTerm = null,
+            NewsSorting newsSorting = NewsSorting.DateCreated,
+            int currentPage = 1,
+            int newsPerPage = int.MaxValue,
+            bool publicOnly = true
             );
 
         IEnumerable<LatestNewsServiceModel> Latest();

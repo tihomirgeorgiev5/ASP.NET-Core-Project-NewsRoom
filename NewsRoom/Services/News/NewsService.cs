@@ -24,14 +24,15 @@ namespace NewsRoom.Services.News
 
 
         public NewsQueryServiceModel All(
-            string area,
-            string searchTerm,
-            NewsSorting newsSorting,
-            int currentPage,
-            int newsPerPage)
+            string area = null,
+            string searchTerm = null,
+            NewsSorting newsSorting = NewsSorting.DateCreated,
+            int currentPage = 1,
+            int newsPerPage = int.MaxValue,
+            bool publicOnly = true)
         {
             var newsQuery = this.data.News
-                .Where(n => n.IsPublic);
+                .Where(n => n.IsPublic == publicOnly);
 
             if (!string.IsNullOrWhiteSpace(area))
             {

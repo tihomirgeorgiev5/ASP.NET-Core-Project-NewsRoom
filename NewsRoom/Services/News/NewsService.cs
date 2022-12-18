@@ -76,6 +76,7 @@ namespace NewsRoom.Services.News
         public IEnumerable<LatestNewsServiceModel> Latest()
           => this.data
              .News
+             .Where(n => n.IsPublic)
              .OrderByDescending(n => n.Id)
              .ProjectTo<LatestNewsServiceModel>(this.mapper)
              .Take(3)

@@ -13,7 +13,7 @@ namespace NewsRoom.Services.Statistics
 
         public StatisticsServiceModel Total()
         {
-            var totalNews = this.data.News.Count();
+            var totalNews = this.data.News.Count(n => n.IsPublic);
             var totalReaders = this.data.Users.Count();
 
             return new StatisticsServiceModel

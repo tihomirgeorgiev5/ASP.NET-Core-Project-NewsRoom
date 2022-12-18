@@ -84,7 +84,11 @@ namespace NewsRoom
                 .UseAuthorization()
                 .UseEndpoints(endpoints =>
                 {
-                    endpoints.MapDefaultAreaRoute();   
+                    endpoints.MapDefaultAreaRoute();
+                    endpoints.MapControllerRoute(
+                        name: "News Details",
+                        pattern: "/News/Details/{id}/{information}",
+                        defaults: new { controller = "News", action = "Details" });
                     endpoints.MapDefaultControllerRoute();
                     endpoints.MapRazorPages();
                 });

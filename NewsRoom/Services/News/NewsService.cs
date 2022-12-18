@@ -30,7 +30,8 @@ namespace NewsRoom.Services.News
             int currentPage,
             int newsPerPage)
         {
-            var newsQuery = this.data.News.AsQueryable();
+            var newsQuery = this.data.News
+                .Where(n => n.IsPublic);
 
             if (!string.IsNullOrWhiteSpace(area))
             {
@@ -98,6 +99,7 @@ namespace NewsRoom.Services.News
                 Date = date,
                 CategoryId = categoryId,
                 JournalistId = journalistId,
+                IsPublic = false
             };
 
             this.data.News.Add(aNewsData);
@@ -123,6 +125,7 @@ namespace NewsRoom.Services.News
             aNewsData.ImageUrl = imageUrl;
             aNewsData.Date = date;
             aNewsData.CategoryId = categoryId;
+            aNewsData.IsPublic = false;
                    
             this.data.SaveChanges();
 

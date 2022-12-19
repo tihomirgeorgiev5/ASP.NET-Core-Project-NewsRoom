@@ -25,9 +25,9 @@
                <td scope="col">@aNews.Title</td>
                <td scope="col">@aNews.CategoryName</td>
                <td scope="col">
-                   <a asp-controller="News" asp-action="Details" asp-route-id="@aNews.Id" asp-route-information="@aNews.ToFriendlyUrl()" class="btn btn-primary">View</a>
-                   <a asp-controller="News" asp-action="Edit" asp-route-id="@aNews.Id" class="btn btn-warning">Edit</a>
-                   <a asp-controller="News" asp-action="Delete" asp-route-id="@aNews.Id" class="btn btn-danger">Delete</a>
+                   <a asp-area="" asp-controller="News" asp-action="Details" asp-route-id="@aNews.Id" asp-route-information="@aNews.ToFriendlyUrl()" class="btn btn-primary float-right ml-3">View</a>
+                   <a  asp-area="" asp-controller="News" asp-action="Edit" asp-route-id="@aNews.Id" class="btn btn-warning float-right ml-3">Edit</a>
+                   <a  asp-area="" asp-controller="News" asp-action="Delete" asp-route-id="@aNews.Id" class="btn btn-danger float-right ml-3">Delete</a>
                </td>
            </tr>
          }

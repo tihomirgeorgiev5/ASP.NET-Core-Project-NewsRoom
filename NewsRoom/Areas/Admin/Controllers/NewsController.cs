@@ -9,7 +9,14 @@ namespace NewsRoom.Areas.Admin.Controllers
         private readonly INewsService news;
 
         public NewsController(INewsService news) => this.news = news;
-        public IActionResult All() => View(this.news.All().News);
+        public IActionResult All()
+        {
+            var news = this.news
+                .All(publicOnly: false)
+                .News;
+
+            return View(news);
+        }
 
     }
 }

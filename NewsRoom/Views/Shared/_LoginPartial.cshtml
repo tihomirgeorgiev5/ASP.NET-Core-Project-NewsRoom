@@ -6,7 +6,7 @@
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 @inject IJournalistService Journalists
-
+ 
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
@@ -20,12 +20,18 @@
                 <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="Mine">My News</a>
             </li>
         }
-        else if(!userIsAdmin)
+        else if (!userIsAdmin)
         {
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="" asp-controller="Journalists" asp-action="Become">Become Journalist</a>
             </li>
 
+        }
+        else if (userIsAdmin)
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="Admin" asp-controller="News" asp-action="All">Administration</a>
+            </li>
         }
 
         <li class="nav-item">

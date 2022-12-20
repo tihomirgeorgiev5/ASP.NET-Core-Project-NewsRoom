@@ -110,7 +110,15 @@ namespace NewsRoom.Services.News
             return aNewsData.Id;
         }
 
-        public bool Edit(int id,string area, string title, string description, string imageUrl, DateTime date, int categoryId)
+        public bool Edit(
+            int id,
+            string area,
+            string title,
+            string description,
+            string imageUrl,
+            DateTime date,
+            int categoryId,
+            bool isPublic)
         {
             var aNewsData = this.data.News.Find(id);
 
@@ -127,7 +135,7 @@ namespace NewsRoom.Services.News
             aNewsData.ImageUrl = imageUrl;
             aNewsData.Date = date;
             aNewsData.CategoryId = categoryId;
-            aNewsData.IsPublic = false;
+            aNewsData.IsPublic = isPublic;
                    
             this.data.SaveChanges();
 
@@ -145,6 +153,15 @@ namespace NewsRoom.Services.News
         => this.data
             .News
             .Any(n => n.Id == aNewsId && n.JournalistId == journalistId);
+
+        public void ChangeVisibility(int newsId)
+        {
+            var aNews = this.data.News.Find(newsId);
+
+            aNews.IsPublic = !aNews.IsPublic;
+
+            this.data.SaveChanges();
+        }
 
         public IEnumerable<string> AllAreas()
             => this.data
@@ -183,6 +200,5 @@ namespace NewsRoom.Services.News
                 .ToList();
 
       
-
     }
 }

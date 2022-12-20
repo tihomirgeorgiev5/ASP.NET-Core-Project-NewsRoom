@@ -18,5 +18,11 @@ namespace NewsRoom.Areas.Admin.Controllers
             return View(news);
         }
 
+        public IActionResult ChangeVisibility(int id)
+        {
+            this.news.ChangeVisibility(id);
+
+            return RedirectToAction(nameof(All));
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using NewsRoom.Infrastructure;
 using NewsRoom.Models.News;
@@ -174,10 +175,11 @@ namespace NewsRoom.Controllers
                aNews.Description,
                aNews.ImageUrl,
                aNews.Date,
-               aNews.CategoryId
+               aNews.CategoryId,
+               this.User.IsAdmin()
                );
 
-            //TempData[GlobalMessageKey] = "Your news was edited!";
+            ///TempData[GlobalMessageKey] = "Your news was edited!";
 
 
             return RedirectToAction(nameof(Details), new { id, information = aNews.ToFriendlyUrl() });

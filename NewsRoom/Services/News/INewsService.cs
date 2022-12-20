@@ -37,12 +37,15 @@ namespace NewsRoom.Services.News
             string description,
             string imageUrl,
             DateTime date,
-            int categoryId
+            int categoryId,
+            bool isPublic
             );
 
         IEnumerable<NewsServiceModel> ByUser(string userId);
 
         bool IsByJournalist(int aNewsId, int journalistId);
+
+        void ChangeVisibility(int newsId); 
 
         IEnumerable<string> AllAreas();
         IEnumerable<NewsCategoryServiceModel> AllCategories();

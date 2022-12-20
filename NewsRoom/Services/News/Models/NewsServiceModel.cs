@@ -15,5 +15,7 @@ namespace NewsRoom.Services.News.Models
         public DateTime Date { get; init; }
 
         public string CategoryName { get; init; }
+
+        public bool IsPublic { get; init; }
     }
 }

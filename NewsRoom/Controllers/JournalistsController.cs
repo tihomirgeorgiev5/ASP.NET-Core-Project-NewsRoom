@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using NewsRoom.Data;
 using NewsRoom.Data.Models;
-using NewsRoom.Infrastructure;
+using NewsRoom.Infrastructure.Extensions;
 using NewsRoom.Models.Journalists;
 using System.Linq;
 

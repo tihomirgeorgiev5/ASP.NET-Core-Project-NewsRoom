@@ -32,7 +32,7 @@ namespace NewsRoom.Services.News
             bool publicOnly = true)
         {
             var newsQuery = this.data.News
-                .Where(n => n.IsPublic == publicOnly);
+                .Where(n => !publicOnly || n.IsPublic);
 
             if (!string.IsNullOrWhiteSpace(area))
             {
@@ -174,11 +174,7 @@ namespace NewsRoom.Services.News
         public IEnumerable<NewsCategoryServiceModel> AllCategories()
               => this.data
          .Categories
-         .Select(n => new NewsCategoryServiceModel
-         {
-             Id = n.Id,
-             Name = n.Name,
-         })
+        .ProjectTo<NewsCategoryServiceModel>(this.mapper)
          .ToList();
 
         public bool CategoryExists(int categoryId)
@@ -186,17 +182,9 @@ namespace NewsRoom.Services.News
             .Categories
             .Any(n => n.Id == categoryId);
 
-        private static IEnumerable<NewsServiceModel> GetNews(IQueryable<ANews> NewsQuery)
+        private IEnumerable<NewsServiceModel> GetNews(IQueryable<ANews> NewsQuery)
             => NewsQuery
-            .Select(n => new NewsServiceModel
-            {
-                Id = n.Id,
-                Area = n.Area,
-                Title = n.Title,
-                ImageUrl = n.ImageUrl,
-                Date = n.Date,
-                CategoryName = n.Category.Name
-            })
+            .ProjectTo<NewsServiceModel>(this.mapper)
                 .ToList();
 
       

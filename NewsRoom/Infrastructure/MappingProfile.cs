@@ -9,8 +9,13 @@ namespace NewsRoom.Infrastructure
     {
         public MappingProfile()
         {
+            this.CreateMap<Category, NewsCategoryServiceModel>();
+
             this.CreateMap<ANews, LatestNewsServiceModel>();
             this.CreateMap<NewsDetailsServiceModel, NewsFormModel>();
+
+            this.CreateMap<ANews, NewsServiceModel>()
+                .ForMember(n => n.CategoryName, cfg => cfg.MapFrom(n => n.Category.Name));
 
             this.CreateMap<ANews, NewsDetailsServiceModel>()
                 .ForMember(n => n.UserId, cfg => cfg.MapFrom(n => n.Journalist.UserId))

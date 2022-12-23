@@ -1,6 +1,6 @@
 ﻿using NewsRoom.Services.News.Models;
 
-namespace NewsRoom.Infrastructure
+namespace NewsRoom.Infrastructure.Extensions
 {
     public static class ModelExtensions
     {

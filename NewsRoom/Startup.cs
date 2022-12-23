@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NewsRoom.Data;
 using NewsRoom.Data.Models;
-using NewsRoom.Infrastructure;
+using NewsRoom.Infrastructure.Extensions;
 using NewsRoom.Services.Journalists;
 using NewsRoom.Services.News;
 using NewsRoom.Services.Statistics;

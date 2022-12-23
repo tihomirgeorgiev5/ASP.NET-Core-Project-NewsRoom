@@ -9,7 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using static NewsRoom.Areas.Admin.AdminConstants;
 
-namespace NewsRoom.Infrastructure
+namespace NewsRoom.Infrastructure.Extensions
 {
     public static class ApplicationBuilderExtensions
     {

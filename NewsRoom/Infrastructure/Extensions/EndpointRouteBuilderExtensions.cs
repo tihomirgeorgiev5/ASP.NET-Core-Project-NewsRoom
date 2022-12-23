@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 
-namespace NewsRoom.Infrastructure
+namespace NewsRoom.Infrastructure.Extensions
 {
     public static class EndpointRouteBuilderExtensions
     {

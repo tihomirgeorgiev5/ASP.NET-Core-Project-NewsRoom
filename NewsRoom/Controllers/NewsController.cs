@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
-using NewsRoom.Infrastructure;
+using NewsRoom.Infrastructure.Extensions;
 using NewsRoom.Models.News;
 using NewsRoom.Services.Journalists;
 using NewsRoom.Services.News;

@@ -3,7 +3,7 @@ using static NewsRoom.Areas.Admin.AdminConstants;
 
 
 
-namespace NewsRoom.Infrastructure
+namespace NewsRoom.Infrastructure.Extensions
 
     
 {

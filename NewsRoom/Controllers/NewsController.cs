@@ -167,7 +167,7 @@ namespace NewsRoom.Controllers
                 return BadRequest();
             }
 
-            this.news.Edit(
+            var edited = this.news.Edit(
                 id,
                aNews.Area,
                aNews.Title,
@@ -177,6 +177,11 @@ namespace NewsRoom.Controllers
                aNews.CategoryId,
                this.User.IsAdmin()
                );
+
+            if (!edited)
+            {
+                return BadRequest();
+            }
 
             ///TempData[GlobalMessageKey] = "Your news was edited!";
 

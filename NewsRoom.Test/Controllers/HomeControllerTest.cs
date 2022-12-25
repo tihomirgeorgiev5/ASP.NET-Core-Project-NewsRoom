@@ -17,7 +17,7 @@ namespace NewsRoom.Test.Controllers
         {
             MyMvc
                 .Pipeline()
-                .ShouldMap("/Error")
+                .ShouldMap("/")
                 .To<HomeController>(n => n.Index())
                 .Which(controller => controller
                       .WithData(GetNews()))
@@ -47,7 +47,10 @@ namespace NewsRoom.Test.Controllers
         }
 
         private static IEnumerable<ANews> GetNews()
-            => Enumerable.Range(0, 10).Select(i => new ANews());
+            => Enumerable.Range(0, 10).Select(i => new ANews
+            {
+                IsPublic = true
+            });
 
     }
 }

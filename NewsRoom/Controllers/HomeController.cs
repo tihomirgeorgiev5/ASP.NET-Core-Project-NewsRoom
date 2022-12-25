@@ -14,7 +14,6 @@ namespace NewsRoom.Controllers
         private readonly IMemoryCache cache;
 
         
-
         public HomeController(
             INewsService news,
             IMemoryCache cache)

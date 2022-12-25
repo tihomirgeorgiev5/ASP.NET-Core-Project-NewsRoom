@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using static NewsRoom.WebConstants.Cache;
+
 namespace NewsRoom.Controllers
 {
     public class HomeController : Controller
@@ -24,9 +26,8 @@ namespace NewsRoom.Controllers
 
         public IActionResult Index()
         {
-            const string latestNewsCacheKey = "LatestNewsCacheKey";
-
-            var latestNews = this.cache.Get<List<LatestNewsServiceModel>>(latestNewsCacheKey);
+           
+            var latestNews = this.cache.Get<List<LatestNewsServiceModel>>(LatestNewsCacheKey);
 
             if (latestNews == null)
             {
@@ -37,7 +38,7 @@ namespace NewsRoom.Controllers
                 var cacheOptions = new MemoryCacheEntryOptions()
                     .SetAbsoluteExpiration(TimeSpan.FromMinutes(15));
 
-                this.cache.Set(latestNewsCacheKey, latestNews, cacheOptions);
+                this.cache.Set(LatestNewsCacheKey, latestNews, cacheOptions);
             }
 
             return View(latestNews);

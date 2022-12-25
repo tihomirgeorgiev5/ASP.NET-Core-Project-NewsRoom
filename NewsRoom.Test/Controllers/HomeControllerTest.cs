@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Xunit;
 
 using static NewsRoom.Test.Data.News;
+using static NewsRoom.WebConstants.Cache;
 
 namespace NewsRoom.Test.Controllers
 
@@ -23,6 +24,10 @@ namespace NewsRoom.Test.Controllers
                 .To<HomeController>(n => n.Index())
                 .Which(controller => controller
                       .WithData(TenPublicNews))
+                /* .ShouldHave()
+                 .MemoryCache(cache => cache
+                 .ContainingEntryWithKey(LatestNewsCacheKey))
+                 .AndAlso() */
                 .ShouldReturn()
                 .View(view => view
                       .WithModelOfType<List<LatestNewsServiceModel>>()

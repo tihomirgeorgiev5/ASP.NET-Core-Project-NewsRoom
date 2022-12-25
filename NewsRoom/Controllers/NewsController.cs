@@ -6,6 +6,8 @@ using NewsRoom.Models.News;
 using NewsRoom.Services.Journalists;
 using NewsRoom.Services.News;
 
+using static NewsRoom.WebConstants;
+
 namespace NewsRoom.Controllers
 {
     public class NewsController : Controller
@@ -183,7 +185,7 @@ namespace NewsRoom.Controllers
                 return BadRequest();
             }
 
-            ///TempData[GlobalMessageKey] = "Your news was edited!";
+            TempData[GlobalMessageKey] = "Your news was edited!";
 
 
             return RedirectToAction(nameof(Details), new { id, information = aNews.ToFriendlyUrl() });

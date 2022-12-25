@@ -28,4 +28,8 @@
     <ProjectReference Include="..\NewsRoom\NewsRoom.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Routing\" />
+  </ItemGroup>
+
 </Project>

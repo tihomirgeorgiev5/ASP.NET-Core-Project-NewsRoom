@@ -1,52 +1,26 @@
-﻿using FluentAssertions;
-using Microsoft.AspNetCore.Mvc;
+﻿using Xunit;
 using MyTested.AspNetCore.Mvc;
 using NewsRoom.Controllers;
-using NewsRoom.Services.News.Models;
-using System.Collections.Generic;
-using Xunit;
 
 using static NewsRoom.Test.Data.News;
-using static NewsRoom.WebConstants.Cache;
+using System.Collections.Generic;
+using NewsRoom.Services.News.Models;
+using FluentAssertions;
 
 namespace NewsRoom.Test.Controllers
-
-   
 {
     public class HomeControllerTest
     {
         [Fact]
-        public void IndexShouldReturnViewWithCorrectModelAndData()
-        {
-            MyMvc
-                .Pipeline()
-                .ShouldMap("/")
-                .To<HomeController>(n => n.Index())
-                .Which(controller => controller
+
+        public void IndexActionShouldReturnCorrectViewWithModel()
+            => MyController<HomeController>
+                  .Instance(instance => instance
                       .WithData(TenPublicNews))
-                /* .ShouldHave()
-                 .MemoryCache(cache => cache
-                 .ContainingEntryWithKey(LatestNewsCacheKey))
-                 .AndAlso() */
-                .ShouldReturn()
-                .View(view => view
+                  .Calling(n => n.Index())
+                  .ShouldReturn()
+                  .View(view => view
                       .WithModelOfType<List<LatestNewsServiceModel>>()
-                      .Passing(m => m.Should().HaveCount(3)));
-
-        }
-
-        [Fact]
-
-        public void ErrorShouldReturnView()
-            => MyMvc
-                .Pipeline()
-                .ShouldMap("/Home/Error")
-                .To<HomeController>(n => n.Error())
-                .Which()
-                .ShouldReturn()
-                .View();
-
-    
-
+                  .Passing(model => model.Should().HaveCount(3)));
     }
 }

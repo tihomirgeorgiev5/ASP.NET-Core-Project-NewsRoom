@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NewsRoom.Data;
+using NewsRoom.Controllers;
 using NewsRoom.Data.Models;
 using NewsRoom.Infrastructure.Extensions;
 using NewsRoom.Services.Journalists;
@@ -88,7 +89,12 @@ namespace NewsRoom
                     endpoints.MapControllerRoute(
                         name: "News Details",
                         pattern: "/News/Details/{id}/{information}",
-                        defaults: new { controller = "News", action = "Details" });
+                        defaults: new 
+                        {
+                            controller = typeof(NewsController).GetControllerName(),
+                            action = nameof(NewsController.Details)
+                        });
+
                     endpoints.MapDefaultControllerRoute();
                     endpoints.MapRazorPages();
                 });

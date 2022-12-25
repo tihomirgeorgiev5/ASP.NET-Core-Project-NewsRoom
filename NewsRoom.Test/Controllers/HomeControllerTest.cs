@@ -46,5 +46,7 @@ namespace NewsRoom.Test.Controllers
                 .ShouldReturn()
                 .View();
 
+    
+
     }
 }

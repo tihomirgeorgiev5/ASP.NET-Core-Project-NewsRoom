@@ -2,13 +2,15 @@
 using Microsoft.AspNetCore.Mvc;
 using MyTested.AspNetCore.Mvc;
 using NewsRoom.Controllers;
-using NewsRoom.Data.Models;
 using NewsRoom.Services.News.Models;
 using System.Collections.Generic;
-using System.Linq;
 using Xunit;
 
+using static NewsRoom.Test.Data.News;
+
 namespace NewsRoom.Test.Controllers
+
+   
 {
     public class HomeControllerTest
     {
@@ -20,7 +22,7 @@ namespace NewsRoom.Test.Controllers
                 .ShouldMap("/")
                 .To<HomeController>(n => n.Index())
                 .Which(controller => controller
-                      .WithData(GetNews()))
+                      .WithData(TenPublicNews))
                 .ShouldReturn()
                 .View(view => view
                       .WithModelOfType<List<LatestNewsServiceModel>>()
@@ -45,12 +47,6 @@ namespace NewsRoom.Test.Controllers
             Assert.IsType<ViewResult>(result);
             
         }
-
-        private static IEnumerable<ANews> GetNews()
-            => Enumerable.Range(0, 10).Select(i => new ANews
-            {
-                IsPublic = true
-            });
 
     }
 }

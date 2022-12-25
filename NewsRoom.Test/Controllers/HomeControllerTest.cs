@@ -32,26 +32,19 @@ namespace NewsRoom.Test.Controllers
                 .View(view => view
                       .WithModelOfType<List<LatestNewsServiceModel>>()
                       .Passing(m => m.Should().HaveCount(3)));
-   
+
         }
 
-       
         [Fact]
+
         public void ErrorShouldReturnView()
-        {
-            // Arrange
-            var homeController = new HomeController(
-                null,
-                 null);
-
-            // Act
-            var result = homeController.Error();
-
-            // Assert
-            Assert.NotNull(result);
-            Assert.IsType<ViewResult>(result);
-            
-        }
+            => MyMvc
+                .Pipeline()
+                .ShouldMap("/Home/Error")
+                .To<HomeController>(n => n.Error())
+                .Which()
+                .ShouldReturn()
+                .View();
 
     }
 }

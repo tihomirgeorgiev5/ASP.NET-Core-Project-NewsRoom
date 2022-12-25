@@ -22,9 +22,7 @@ namespace NewsRoom.Test.Pipeline
                 .To<HomeController>(n => n.Index())
                 .Which(controller => controller
                       .WithData(TenPublicNews))
-                /* .ShouldHave()
-                 .MemoryCache(cache => cache
-                 .ContainingEntryWithKey(LatestNewsCacheKey))
+                /* 
                  .AndAlso() */
                 .ShouldReturn()
                 .View(view => view

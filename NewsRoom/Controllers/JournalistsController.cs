@@ -52,7 +52,7 @@ namespace NewsRoom.Controllers
             this.data.Journalists.Add(journalistData);
             this.data.SaveChanges();
 
-            return RedirectToAction("All", "News");
+            return RedirectToAction(nameof(NewsController.All), "News");
 
         }
     }

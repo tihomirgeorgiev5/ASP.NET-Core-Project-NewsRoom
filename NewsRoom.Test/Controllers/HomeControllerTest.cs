@@ -17,7 +17,7 @@ namespace NewsRoom.Test.Controllers
 
         public void GetIndexActionShouldReturnCorrectViewWithModel()
             => MyController<HomeController>
-                  .Instance(instance => instance
+                  .Instance(controller => controller
                        .WithData(TenPublicNews))
                   .Calling(n => n.Index())
                   .ShouldHave()

@@ -1,5 +1,8 @@
 ﻿using MyTested.AspNetCore.Mvc;
 using NewsRoom.Controllers;
+using NewsRoom.Data.Models;
+using NewsRoom.Models.Journalists;
+using System.Linq;
 using Xunit;
 
 namespace NewsRoom.Test.Controllers
@@ -24,5 +27,28 @@ namespace NewsRoom.Test.Controllers
             .ShouldReturn()
             .View();
 
-    }
+        [Theory]
+        [InlineData("Journalist", "+359888888888")]
+        public void PostBecomeShouldBeForAuthorizedUsersAndReturnRedirectWithValidModel(
+            string journalistName,
+            string phoneNumber)
+            => MyController<JournalistsController>
+                  .Instance(controller => controller
+                      .WithUser())
+                  .Calling(n => n.Become(new BecomeJournalistFormModel
+                      {
+                          Name = journalistName,
+                          PhoneNumber = phoneNumber
+                      }))
+                  .ShouldHave()
+                  .ActionAttributes(attributes => attributes
+                      .RestrictingForHttpMethod(HttpMethod.Post)
+                      .RestrictingForAuthorizedRequests())
+                  .ValidModelState()
+                  .Data(data => data.WithSet<Journalist>(journalists => journalists
+                      .Any(j =>
+                         j.Name == journalistName &&
+                         j.PhoneNumber == phoneNumber &&
+                         j.UserId == TestUser.Identifier)));
+    }             
 }

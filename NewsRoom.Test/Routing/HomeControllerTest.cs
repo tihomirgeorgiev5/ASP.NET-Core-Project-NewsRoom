@@ -8,7 +8,7 @@ namespace NewsRoom.Test.Routing
     {
         [Fact]
 
-        public void IndexRouteShouldBeMapper()
+        public void GetIndexRouteShouldBeMapper()
            => MyRouting
                .Configuration()
                .ShouldMap("/")
@@ -16,7 +16,7 @@ namespace NewsRoom.Test.Routing
 
         [Fact]
 
-        public void ErrorRouteShouldBeMapper()
+        public void GetErrorRouteShouldBeMapper()
             => MyRouting
                 .Configuration()
                 .ShouldMap("/Home/Error")

@@ -2,8 +2,11 @@
 using NewsRoom.Controllers;
 using NewsRoom.Data.Models;
 using NewsRoom.Models.Journalists;
+using NewsRoom.Models.News;
 using System.Linq;
 using Xunit;
+
+using static NewsRoom.WebConstants;
 
 namespace NewsRoom.Test.Controllers
 {
@@ -36,10 +39,10 @@ namespace NewsRoom.Test.Controllers
                   .Instance(controller => controller
                       .WithUser())
                   .Calling(n => n.Become(new BecomeJournalistFormModel
-                      {
-                          Name = journalistName,
-                          PhoneNumber = phoneNumber
-                      }))
+                  {
+                      Name = journalistName,
+                      PhoneNumber = phoneNumber
+                  }))
                   .ShouldHave()
                   .ActionAttributes(attributes => attributes
                       .RestrictingForHttpMethod(HttpMethod.Post)
@@ -49,6 +52,13 @@ namespace NewsRoom.Test.Controllers
                       .Any(j =>
                          j.Name == journalistName &&
                          j.PhoneNumber == phoneNumber &&
-                         j.UserId == TestUser.Identifier)));
+                         j.UserId == TestUser.Identifier)))
+                  .TempData(tempData => tempData
+                      .ContainingEntryWithKey(GlobalMessageKey))
+                  .AndAlso()
+                  .ShouldReturn()
+                  .Redirect(redirect => redirect
+                      .To<NewsController>(n => n.All(With.Any<AllNewsQueryModel>())));
+
     }             
 }

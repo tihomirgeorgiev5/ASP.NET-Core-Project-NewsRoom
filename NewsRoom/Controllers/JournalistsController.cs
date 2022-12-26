@@ -6,6 +6,8 @@ using NewsRoom.Infrastructure.Extensions;
 using NewsRoom.Models.Journalists;
 using System.Linq;
 
+using static NewsRoom.WebConstants;
+
 namespace NewsRoom.Controllers
 {
     public class JournalistsController : Controller
@@ -51,6 +53,8 @@ namespace NewsRoom.Controllers
 
             this.data.Journalists.Add(journalistData);
             this.data.SaveChanges();
+
+            TempData[GlobalMessageKey] = "Thank you for becoming a journalist!";
 
             return RedirectToAction(nameof(NewsController.All), "News");
 

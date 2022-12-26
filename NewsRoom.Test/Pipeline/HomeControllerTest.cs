@@ -22,8 +22,6 @@ namespace NewsRoom.Test.Pipeline
                 .To<HomeController>(n => n.Index())
                 .Which(controller => controller
                       .WithData(TenPublicNews))
-                /* 
-                 .AndAlso() */
                 .ShouldReturn()
                 .View(view => view
                       .WithModelOfType<List<LatestNewsServiceModel>>()
@@ -41,8 +39,6 @@ namespace NewsRoom.Test.Pipeline
                 .Which()
                 .ShouldReturn()
                 .View();
-
-    
 
     }
 }

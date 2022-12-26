@@ -10,16 +10,16 @@ namespace NewsRoom.Test.Routing
         [Fact]
         public void GetBecomeShouldBeMapped()
             => MyRouting
-            .Configuration()
-            .ShouldMap("/Journalists/Become")
-            .To<JournalistsController>(n => n.Become());
+                .Configuration()
+                .ShouldMap("/Journalists/Become")
+                .To<JournalistsController>(n => n.Become());
 
         [Fact]
         public void PostBecomeShouldBeMapped()
-          => MyRouting
-          .Configuration()
-          .ShouldMap(request => request.WithPath("/Journalists/Become")
-          .WithMethod(HttpMethod.Post))
-          .To<JournalistsController>(n => n.Become(With.Any<BecomeJournalistFormModel>()));
+            => MyRouting
+                .Configuration()
+                .ShouldMap(request => request.WithPath("/Journalists/Become")
+                    .WithMethod(HttpMethod.Post))
+                .To<JournalistsController>(n => n.Become(With.Any<BecomeJournalistFormModel>()));
     }
 }

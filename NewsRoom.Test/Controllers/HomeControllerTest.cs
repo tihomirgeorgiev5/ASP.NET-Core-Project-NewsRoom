@@ -15,7 +15,7 @@ namespace NewsRoom.Test.Controllers
     {
         [Fact]
 
-        public void IndexActionShouldReturnCorrectViewWithModel()
+        public void GetIndexActionShouldReturnCorrectViewWithModel()
             => MyController<HomeController>
                   .Instance(instance => instance
                        .WithData(TenPublicNews))
@@ -34,7 +34,7 @@ namespace NewsRoom.Test.Controllers
 
         [Fact]
 
-        public void ErrorShouldReturnView()
+        public void GetErrorShouldReturnView()
             => MyController<HomeController>
                    .Instance()
                    .Calling(n => n.Error())

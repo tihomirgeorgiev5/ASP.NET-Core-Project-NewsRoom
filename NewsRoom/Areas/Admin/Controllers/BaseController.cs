@@ -7,7 +7,7 @@ namespace NewsRoom.Areas.Admin.Controllers
 {
     [Area(AreaName)]
     [Authorize(Roles = AdministratorRoleName)]
-    public abstract class AdminController : Controller
+    public abstract class BaseController : Controller
     {
     }
 }

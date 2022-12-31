@@ -4,7 +4,7 @@ using NewsRoom.Services.News;
 namespace NewsRoom.Areas.Admin.Controllers
 {
     
-    public class NewsController : AdminController
+    public class NewsController : BaseController
     {
         private readonly INewsService news;
 

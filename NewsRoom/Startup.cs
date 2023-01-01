@@ -101,6 +101,7 @@ namespace NewsRoom
                 .UseHttpsRedirection()
                 .UseStaticFiles()
                 .UseRouting()
+                .UseRequestLocalization()
                 .UseAuthentication()
                 .UseAuthorization()
                 .UseEndpoints(endpoints =>

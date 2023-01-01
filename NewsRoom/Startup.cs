@@ -50,6 +50,9 @@ namespace NewsRoom
 
             services.AddMemoryCache();
 
+            services.AddLocalization(options
+                => options.ResourcesPath = "Resources");
+
             services
                 .AddControllersWithViews(options =>
                 {

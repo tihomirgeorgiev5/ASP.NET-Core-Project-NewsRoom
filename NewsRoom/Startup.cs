@@ -13,7 +13,8 @@ using NewsRoom.Infrastructure.Extensions;
 using NewsRoom.Services.Journalists;
 using NewsRoom.Services.News;
 using NewsRoom.Services.Statistics;
-
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 namespace NewsRoom
 {
@@ -53,6 +54,20 @@ namespace NewsRoom
             services.AddLocalization(options
                 => options.ResourcesPath = "Resources");
 
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new CultureInfo[]
+                {
+                    new CultureInfo("bg"),
+                    new CultureInfo("en"),
+                    new CultureInfo("de")
+                };
+
+                options.DefaultRequestCulture = new RequestCulture("bg");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            });
+
             services
                 .AddControllersWithViews(options =>
                 {
@@ -62,8 +77,8 @@ namespace NewsRoom
             services.AddTransient<IStatisticsService, StatisticsService>();
             services.AddTransient<INewsService, NewsService>();
             services.AddTransient<IJournalistService, JournalistService>();
+            
         }
-
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

@@ -1,20 +1,21 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using NewsRoom.Data;
 using NewsRoom.Controllers;
+using NewsRoom.Data;
 using NewsRoom.Data.Models;
 using NewsRoom.Infrastructure.Extensions;
 using NewsRoom.Services.Journalists;
 using NewsRoom.Services.News;
 using NewsRoom.Services.Statistics;
 using System.Globalization;
-using Microsoft.AspNetCore.Localization;
 
 namespace NewsRoom
 {
@@ -31,8 +32,8 @@ namespace NewsRoom
 
             services
                 .AddDbContext<NewsRoomDbContext>(options =>
-                options
-                .UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
+                   options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
+
             services
                 .AddDatabaseDeveloperPageExceptionFilter();
              
@@ -72,7 +73,8 @@ namespace NewsRoom
                 .AddControllersWithViews(options =>
                 {
                     options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
-                });
+                })
+                .AddMvcLocalization(LanguageViewLocationExpanderFormat.Suffix);
 
             services.AddTransient<IStatisticsService, StatisticsService>();
             services.AddTransient<INewsService, NewsService>();

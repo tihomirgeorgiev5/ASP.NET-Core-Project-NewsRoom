@@ -1,11 +1,13 @@
-﻿@model List<LatestNewsServiceModel>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model List<LatestNewsServiceModel>
+@inject IViewLocalizer localizer
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = localizer["PageTitle"];
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Current time is: @DateTime.UtcNow</p>
+    <p>@localizer["lblCurrentTime"]: @DateTime.UtcNow</p>
 </div>
 
 @{

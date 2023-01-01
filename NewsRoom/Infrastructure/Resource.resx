@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="emRequired" xml:space="preserve">
-    <value>{0} полето е задължително</value>
+    <value>Полето {0} е задължително!</value>
   </data>
 </root>

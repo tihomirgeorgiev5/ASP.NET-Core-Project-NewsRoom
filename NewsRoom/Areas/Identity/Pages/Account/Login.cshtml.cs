@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using NewsRoom.Data.Models;
+using NewsRoom.Infrastructure;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
@@ -28,7 +29,7 @@ namespace NewsRoom.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessageResourceName = "emRequired", ErrorMessageResourceType = typeof(Resource))]
             [EmailAddress]
             public string Email { get; set; }
 

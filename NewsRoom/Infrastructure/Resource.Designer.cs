@@ -61,7 +61,7 @@ namespace NewsRoom.Infrastructure {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} полето е задължително.
+        ///   Looks up a localized string similar to Полето {0} е задължително!.
         /// </summary>
         public static string emRequired {
             get {

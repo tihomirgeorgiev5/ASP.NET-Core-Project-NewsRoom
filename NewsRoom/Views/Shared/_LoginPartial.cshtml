@@ -1,4 +1,8 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@{ 
+    var routeData = ViewContext.RouteData.Values;
+    routeData["culture"] = "{0}";
+}
+@using Microsoft.AspNetCore.Identity
 @using NewsRoom.Data.Models
 
 
@@ -54,7 +58,7 @@
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
         </li>
         <li class="nav-item">
-            <language-nav></language-nav>
+            <language-nav redirect-to-url="@(Url.RouteUrl(routeData))"></language-nav>
         </li>
     }
 </ul>

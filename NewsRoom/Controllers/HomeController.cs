@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using NewsRoom.Services.News;
 using NewsRoom.Services.News.Models;
@@ -46,6 +48,22 @@ namespace NewsRoom.Controllers
         
        
         public IActionResult Error() =>  View();
+
+        public IActionResult SetCultureCookie(string cltr, string returnUrl)
+        {
+            Response.Cookies.Append(
+                
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(cltr)),
+                new CookieOptions
+                {
+                    Expires = DateTime.UtcNow.AddYears(1),
+                    SameSite = SameSiteMode.Strict
+                });
+
+            return LocalRedirect(returnUrl);
+            
+        }
         
     }
 }

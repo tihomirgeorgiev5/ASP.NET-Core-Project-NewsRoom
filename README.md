@@ -1,3 +1,3 @@
 # ASP.NET-Core-Project-NewsRoom
-This is my first personal project during SoftUni.
-It's one App about newsletters added, possibility to added new newsletters, become Journalist possibility!
+NewsRoom is a Web Application.This is my first defense project for ASP.NET Core course at SoftUni.
+

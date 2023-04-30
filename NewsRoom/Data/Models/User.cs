@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
-using static NewsRoom.Data.DataConstants.User;
+using static NewsRoom.Data.GlobalConstants.User;
 
 namespace NewsRoom.Data.Models
 {

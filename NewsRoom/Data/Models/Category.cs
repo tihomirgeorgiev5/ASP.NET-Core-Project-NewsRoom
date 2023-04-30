@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using static NewsRoom.Data.DataConstants.Category;
+using static NewsRoom.Data.GlobalConstants.Category;
 
 namespace NewsRoom.Data.Models
 {

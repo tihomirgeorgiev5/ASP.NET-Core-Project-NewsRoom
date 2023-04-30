@@ -1,0 +1,22 @@
+﻿@model NewsRoom.Models.ErrorViewModel
+@using NewsRoom.Data;
+
+@{ 
+    ViewData["Title"] = "404";
+}
+
+<div class="container">
+    <div class="error-page">
+        <div class="error-content image">
+            <img src="@GlobalConstants.Images.Error404" class="img-thumbnail" />
+        </div>
+        <div class="error-content text">
+            <h1 class="text-danger" style="color: darkblue">Oops!</h1>
+            <h2 class="text-danger">An error occurred while processing your request.</h2>
+            <span>We are sorry, the page you are looking is not found or temporarlly unavailable. Please go back to Home Page. Thank you for your undestanding!</span>
+        </div>
+        <div class="btn btn-primary">
+            <a class="nav-link text-white" href="/">GO HOME PAGE</a>
+        </div>
+    </div>
+</div>

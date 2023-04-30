@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using static NewsRoom.Data.DataConstants.ANews;
+using static NewsRoom.Data.GlobalConstants.ANews;
 
 namespace NewsRoom.Models.News
 {

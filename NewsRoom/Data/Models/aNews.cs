@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using static NewsRoom.Data.DataConstants.ANews;
+using static NewsRoom.Data.GlobalConstants.ANews;
 
 namespace NewsRoom.Data.Models
 {

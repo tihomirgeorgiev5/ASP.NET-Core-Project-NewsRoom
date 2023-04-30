@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using static NewsRoom.Data.DataConstants.Journalist;
+using static NewsRoom.Data.GlobalConstants.Journalist;
 
 
 namespace NewsRoom.Models.Journalists

@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Threading.Tasks;
 
-using static NewsRoom.Data.DataConstants.User;
+using static NewsRoom.Data.GlobalConstants.User;
 
 namespace NewsRoom.Areas.Identity.Pages.Account
 {

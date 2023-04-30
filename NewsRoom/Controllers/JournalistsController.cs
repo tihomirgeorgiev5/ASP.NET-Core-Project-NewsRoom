@@ -10,7 +10,7 @@ using static NewsRoom.WebConstants;
 
 namespace NewsRoom.Controllers
 {
-    public class JournalistsController : Controller
+    public class JournalistsController : BaseController
     {
         private readonly NewsRoomDbContext data;
 

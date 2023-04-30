@@ -10,7 +10,7 @@ using static NewsRoom.WebConstants;
 
 namespace NewsRoom.Controllers
 {
-    public class NewsController : Controller
+    public class NewsController : BaseController
     {
         private readonly INewsService news;
         private readonly IJournalistService journalists;

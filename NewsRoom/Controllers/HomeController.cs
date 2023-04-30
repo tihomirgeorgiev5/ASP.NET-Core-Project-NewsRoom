@@ -12,7 +12,7 @@ using static NewsRoom.WebConstants.Cache;
 
 namespace NewsRoom.Controllers
 {
-    public class HomeController : BaseController
+    public class HomeController : Controller
     {
         private readonly INewsService news;
         private readonly IMemoryCache cache;

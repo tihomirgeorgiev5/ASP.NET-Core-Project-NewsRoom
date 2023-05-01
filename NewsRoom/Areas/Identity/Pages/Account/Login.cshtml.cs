@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
 using NewsRoom.Data.Models;
 using NewsRoom.Infrastructure;
 using System.ComponentModel.DataAnnotations;
@@ -14,11 +15,16 @@ namespace NewsRoom.Areas.Identity.Pages.Account
     public class LoginModel : PageModel
     {
         private readonly SignInManager<User> signInManager;
+        private readonly UserManager<User> userManager;
+        private readonly ILogger<LoginModel> logger;
 
-        public LoginModel(SignInManager<User> signInManager)
-        => this.signInManager = signInManager;
+        public LoginModel(SignInManager<User> signInManager, UserManager<User> userManager, ILogger<LoginModel> logger)
+        {
+            this.signInManager = signInManager;
+            this.userManager = userManager;
+            this.logger = logger;
+        } 
         
-
         [BindProperty]
         public InputModel Input { get; set; }
 
@@ -51,6 +57,7 @@ namespace NewsRoom.Areas.Identity.Pages.Account
             returnUrl ??= Url.Content("~/");
 
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+
 
             ReturnUrl = returnUrl;
         }

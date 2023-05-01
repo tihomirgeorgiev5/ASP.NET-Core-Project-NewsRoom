@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using NewsRoom.Data.Models;
 using NewsRoom.Infrastructure;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace NewsRoom.Areas.Identity.Pages.Account
@@ -27,6 +29,8 @@ namespace NewsRoom.Areas.Identity.Pages.Account
         
         [BindProperty]
         public InputModel Input { get; set; }
+
+        public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
         public string ReturnUrl { get; set; }
 
@@ -57,6 +61,8 @@ namespace NewsRoom.Areas.Identity.Pages.Account
             returnUrl ??= Url.Content("~/");
 
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+
+            ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
 
             ReturnUrl = returnUrl;

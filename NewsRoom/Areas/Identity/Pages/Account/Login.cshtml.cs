@@ -89,16 +89,17 @@ namespace NewsRoom.Areas.Identity.Pages.Account
                
                 if (result.IsLockedOut)
                 {
+                    logger.LogWarning("User account locked out.");
                     return RedirectToPage("./Lockout");
                 }
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-
                     return Page();
                 }
             }
 
+            // If we got this far, something failed, redisplay form
             return Page();
         }
     }

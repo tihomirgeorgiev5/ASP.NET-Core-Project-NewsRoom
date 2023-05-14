@@ -10,7 +10,7 @@
             public const int PasswordMaxLength = 100;
         
         }
-        public static class ANews
+        public static class News
         {
             public const int AreaMaxLength = 30;
             public const int AreaMinLength = 2;

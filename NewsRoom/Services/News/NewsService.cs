@@ -92,7 +92,7 @@ namespace NewsRoom.Services.News
 
         public int Create(string area, string title, string description, string imageUrl, DateTime date, int categoryId, int journalistId)
         {
-            var aNewsData = new ANews
+            var aNewsData = new Data.Models.News
             {
                 Area = area,
                 Title = title,
@@ -182,7 +182,7 @@ namespace NewsRoom.Services.News
             .Categories
             .Any(n => n.Id == categoryId);
 
-        private IEnumerable<NewsServiceModel> GetNews(IQueryable<ANews> NewsQuery)
+        private IEnumerable<NewsServiceModel> GetNews(IQueryable<Data.Models.News> NewsQuery)
             => NewsQuery
             .ProjectTo<NewsServiceModel>(this.mapper)
                 .ToList();

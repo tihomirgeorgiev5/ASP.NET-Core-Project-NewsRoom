@@ -11,13 +11,13 @@ namespace NewsRoom.Infrastructure
         {
             this.CreateMap<Category, NewsCategoryServiceModel>();
 
-            this.CreateMap<ANews, LatestNewsServiceModel>();
+            this.CreateMap<News, LatestNewsServiceModel>();
             this.CreateMap<NewsDetailsServiceModel, NewsFormModel>();
 
-            this.CreateMap<ANews, NewsServiceModel>()
+            this.CreateMap<News, NewsServiceModel>()
                 .ForMember(n => n.CategoryName, cfg => cfg.MapFrom(n => n.Category.Name));
 
-            this.CreateMap<ANews, NewsDetailsServiceModel>()
+            this.CreateMap<News, NewsDetailsServiceModel>()
                 .ForMember(n => n.UserId, cfg => cfg.MapFrom(n => n.Journalist.UserId))
                 .ForMember(n => n.CategoryName, cfg => cfg.MapFrom(n => n.Category.Name));
         }

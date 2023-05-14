@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using static NewsRoom.Data.GlobalConstants.ANews;
+using static NewsRoom.Data.GlobalConstants.News;
 
 namespace NewsRoom.Data.Models
 {
-    public class ANews
+    public class News
     {
         public int Id { get; init; }
 

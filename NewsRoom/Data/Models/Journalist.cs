@@ -20,7 +20,7 @@ namespace NewsRoom.Data.Models
         [Required]
         public string UserId { get; set; }
 
-        public IEnumerable<ANews> News { get; init; } = new List<ANews>();
+        public IEnumerable<News> News { get; init; } = new List<News>();
 
 
     }

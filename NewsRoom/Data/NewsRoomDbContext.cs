@@ -12,7 +12,7 @@ namespace NewsRoom.Data
         {
         }
 
-        public DbSet<ANews> News { get; init; }
+        public DbSet<News> News { get; init; }
 
         public DbSet<Category> Categories { get; init; }
 
@@ -29,14 +29,14 @@ namespace NewsRoom.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder
-                .Entity<ANews>()
+                .Entity<News>()
                 .HasOne(n => n.Category)
                 .WithMany(n => n.News)
                 .HasForeignKey(n => n.CategoryId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
-                .Entity<ANews>()
+                .Entity<News>()
                 .HasOne(n => n.Journalist)
                 .WithMany(j => j.News)
                 .HasForeignKey(n => n.JournalistId)

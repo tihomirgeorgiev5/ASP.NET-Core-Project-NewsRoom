@@ -12,6 +12,6 @@ namespace NewsRoom.Data.Models
         [MaxLength(NameMaxLength)]
         public string Name { get; set; }
 
-        public IEnumerable<ANews> News { get; init; } = new List<ANews>();
+        public IEnumerable<News> News { get; init; } = new List<News>();
     }
 }

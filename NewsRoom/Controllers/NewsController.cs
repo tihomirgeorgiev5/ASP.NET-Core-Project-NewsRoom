@@ -118,6 +118,7 @@ namespace NewsRoom.Controllers
             return RedirectToAction(nameof(Details), new { id = newsId, information = aNews.ToFriendlyUrl()});
         }
 
+        [Authorize]
         public IActionResult Edit(int id)
         {
             var userId = this.User.Id();

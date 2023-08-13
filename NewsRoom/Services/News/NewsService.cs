@@ -90,7 +90,14 @@ namespace NewsRoom.Services.News
             .ProjectTo<NewsDetailsServiceModel>(this.mapper)
             .FirstOrDefault();
 
-        public int Create(string area, string title, string description, string imageUrl, DateTime date, int categoryId, int journalistId)
+        public int Create(
+            string area,
+            string title,
+            string description, 
+            string imageUrl,
+            DateTime date,
+            int categoryId, 
+            int journalistId)
         {
             var aNewsData = new Data.Models.News
             {
@@ -122,6 +129,7 @@ namespace NewsRoom.Services.News
         {
             var aNewsData = this.data.News.Find(id);
 
+            //here we check if we have the right to edit
             if (aNewsData == null)
             {
                 return false;
@@ -187,6 +195,14 @@ namespace NewsRoom.Services.News
             .ProjectTo<NewsServiceModel>(this.mapper)
                 .ToList();
 
-      
+        public void Delete (int id)
+        {
+            var aNewsToRemove = this.data.News
+                .Where(n => n.Id == id)
+                .FirstOrDefault();
+
+            data.News.Remove(aNewsToRemove);
+            data.SaveChanges();
+        } 
     }
 }

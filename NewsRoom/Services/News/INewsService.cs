@@ -41,9 +41,11 @@ namespace NewsRoom.Services.News
             bool isPublic
             );
 
+        void Delete(int id);
+
         IEnumerable<NewsServiceModel> ByUser(string userId);
 
-        bool IsByJournalist(int aNewsId, int journalistId);
+        bool IsByJournalist(int aNewsId, int journalistId); 
 
         void ChangeVisibility(int newsId); 
 

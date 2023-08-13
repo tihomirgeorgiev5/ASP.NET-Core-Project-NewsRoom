@@ -193,6 +193,27 @@ namespace NewsRoom.Controllers
 
         }
 
+        [Authorize]
+        public IActionResult Delete(int id)
+        {
+            var userId = this.User.Id();
+            if (!this.journalists.IsJournalist(userId) && !User.IsAdmin())
+            {
+                return RedirectToAction(nameof(JournalistsController.Become), "Journalists");
+            }
+
+            var aNews = this.news.Details(id);
+
+            if (aNews.UserId != userId && !User.IsAdmin())
+            {
+                return Unauthorized();
+            }
+
+            news.Delete(id);
+
+            return View("SuccessfullyDeleted");
+        }
+
 
 
 

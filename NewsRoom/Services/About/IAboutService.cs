@@ -8,6 +8,6 @@ namespace NewsRoom.Services.About
 {
     public interface IAboutService
     {
-        Task<FaqViewModel> CreateAsync
+        
     }
 }

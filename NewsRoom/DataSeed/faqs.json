@@ -1,0 +1,13 @@
+[
+  {
+    "Id": 1,
+    "Question": "Where news is shown?",
+    "Answer": "News is shown on home (start) page, when you click on a bar button All News"
+  },
+  {
+    "Id": 2,
+    "Question": "How to add a News post?",
+    "Answer": "You can add a news post, when you click on a bar button Add News,after Autorization"
+  }
+  
+]

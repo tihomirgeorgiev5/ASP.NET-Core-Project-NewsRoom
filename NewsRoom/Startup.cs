@@ -12,6 +12,7 @@ using NewsRoom.Controllers;
 using NewsRoom.Data;
 using NewsRoom.Data.Models;
 using NewsRoom.Infrastructure.Extensions;
+using NewsRoom.Services.About;
 using NewsRoom.Services.Journalists;
 using NewsRoom.Services.News;
 using NewsRoom.Services.Statistics;
@@ -79,6 +80,7 @@ namespace NewsRoom
             services.AddTransient<IStatisticsService, StatisticsService>();
             services.AddTransient<INewsService, NewsService>();
             services.AddTransient<IJournalistService, JournalistService>();
+            services.AddTransient<IAboutService, AboutService>();
             
         }
 

@@ -42,6 +42,14 @@
             public const string Error404 = "https://img.freepik.com/free-vector/oops-404-error-with-broken-robot-concept-illustration_114360-5529.jpg?w=740&t=st=1682870909~exp=1682871509~hmac=9096d64eb44e1d8600800a00ced997dc173d8d3b6191c4a09f36ac11bab84b6d";
             public const string Error500 = "https://img.freepik.com/free-vector/500-internal-server-error-concept-illustration_114360-1905.jpg?w=740&t=st=1682870991~exp=1682871591~hmac=3079b6c4fa0cef3808bb565d620a0b1a83fe397166f5879b8c8dbe8b0f64e16c";
         }
+
+        public static class FaqEntity
+        {
+            public const int QuestionMinLength = 15;
+            public const int QuestionMaxLength = 150;
+            public const int AnswerMinLength = 15;
+            public const int AnswerMaxLength = 150;
+        }
        
 
         

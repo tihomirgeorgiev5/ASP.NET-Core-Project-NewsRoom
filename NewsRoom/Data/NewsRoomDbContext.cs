@@ -13,12 +13,18 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 using System.IO;
+using Microsoft.ProjectServer.Client;
 
 namespace NewsRoom.Data
 {
     public class NewsRoomDbContext : IdentityDbContext<User>
     {
-       
+        private static readonly MethodInfo SetIsDeletedQueryFilterMethod =
+            typeof(NewsRoomDbContext).GetMethod(
+                nameof(SetIsDeletedQueryFilter),
+                BindingFlags.NonPublic | BindingFlags.Static);
+
+
         public NewsRoomDbContext(DbContextOptions<NewsRoomDbContext> options)
             : base(options)
         {
@@ -45,6 +51,25 @@ namespace NewsRoom.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+
+            var entityTypes = builder.Model.GetEntityTypes().ToList();
+
+            // Set global query filter for not deleted entities only
+            var deletableEntityTypes = entityTypes
+                .Where(et => et.ClrType != null && typeof(IDeletableEntity).IsAssignableFrom(et.ClrType));
+
+            foreach (var deletableEntityType in deletableEntityTypes)
+            {
+                var method = SetIsDeletedQueryFilterMethod.MakeGenericMethod(deletableEntityType.ClrType);
+                method.Invoke(null, new object[] { builder });
+
+            }
+            var foreignKeys = entityTypes
+                .SelectMany(e => e.GetForeignKeys().Where(f => f.DeleteBehavior == DeleteBehavior.Cascade));
+            foreach (var foreignKey in foreignKeys)
+            {
+                foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
+            }
             builder
                 .Entity<News>()
                 .HasOne(n => n.Category)
@@ -68,7 +93,10 @@ namespace NewsRoom.Data
 
             builder
                 .Entity<FaqEntity>()
+                .HasNoKey()
                 .HasData(SeedUserData<FaqEntity>(@"DataSeed/faqs.json"));
+                
+                
 
             base.OnModelCreating(builder);
         }
@@ -83,6 +111,12 @@ namespace NewsRoom.Data
             }
             return model;
 
-        } 
+        }
+
+        private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)
+            where T : class, IDeletableEntity
+        {
+            builder.Entity<T>().HasQueryFilter(e => !e.IsDeleted);
+        }
     }
 }

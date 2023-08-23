@@ -28,5 +28,15 @@ namespace NewsRoom.Services.About
         {
             throw new NotImplementedException();
         }
+
+        public Task<IEnumerable<FaqViewModel>> GetAllFaqsAsync<T>()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<FaqViewModel> GetByIdAsync<T>(int faqId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

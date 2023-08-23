@@ -11,7 +11,9 @@ namespace NewsRoom.Services.About
 
         Task<FaqViewModel> EditAsync(FaqEditViewModel model);
 
-        Task<IEnumerable<FaqViewModel>> GetAllFaqsAsync<T>(int faqId);
+        Task<IEnumerable<FaqViewModel>> GetAllFaqsAsync<T>();
+
+        Task<FaqViewModel> GetByIdAsync<T>(int faqId);
 
         void DeleteById(int id);
         

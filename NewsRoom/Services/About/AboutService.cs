@@ -1,17 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NewsRoom.Areas.Admin.Models;
 using NewsRoom.Data;
-using NewsRoom.Data.Models;
 using NewsRoom.Infrastructure.Data.Repositories;
-using NewsRoom.Infrastructure.Data;
-using NewsRoom.Infrastructure.Data.Common;
-using NewsRoom.Infrastructure.Data.Common.Models;
 using NewsRoom.Models.FaqEntity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using FaqEntity = NewsRoom.Infrastructure.Data.Common.Models.FaqEntity;
 
 namespace NewsRoom.Services.About
 {
@@ -42,13 +37,13 @@ namespace NewsRoom.Services.About
                 throw new ArgumentException(string.Format(MessageConstants.Faq.FaqAlreadyExist, model.Question, model.Answer));
             }
 
-           // var faq1 = await _newsRoomDbContext.Faqs.AddAsync(new FaqEntity()
-           // {
-           //     Answer = model.Answer,
-           //     Question = model.Question,
-           //     CreatedOn = DateTime.Now,
-           //     IsDeleted = false
-           // });
+            var faq1 = await _newsRoomDbContext.Faqs.AddAsync(new FaqEntity()
+            {
+                Answer = model.Answer,
+                Question = model.Question,
+                CreatedOn = DateTime.Now,
+                IsDeleted = false
+            });
 
             _newsRoomDbContext.SaveChanges();
 
@@ -63,14 +58,35 @@ namespace NewsRoom.Services.About
             _newsRoomDbContext.SaveChanges();
         }
 
-        public Task<FaqViewModel> EditAsync(FaqEditViewModel model)
+        public async Task<FaqViewModel> EditAsync(FaqEditViewModel model)
         {
-            throw new NotImplementedException();
+            var faq = _newsRoomDbContext.Faqs.FirstOrDefault(f => f.Id == model.FaqId);
+
+            if (faq == null)
+            {
+                throw new ArgumentException(string.Format(MessageConstants.Faq.FaqNotFound, model.FaqId));
+            }
+
+            faq.Answer = model.Answer;
+            faq.Question = model.Question;
+            faq.ModifiedOn = DateTime.UtcNow;
+
+            _newsRoomDbContext.Faqs.Update(faq);
+            _newsRoomDbContext.SaveChanges();
+
+            return new FaqViewModel();
         }
 
-        public Task<IEnumerable<FaqViewModel>> GetAllFaqsAsync<T>(int faqId)
+        public async Task<IEnumerable<FaqViewModel>> GetAllFaqsAsync<T>()
         {
-            throw new NotImplementedException();
+            var result = await _newsRoomDbContext.Faqs.Select(f => new FaqViewModel
+            {
+                Answer = f.Answer,
+                FaqId = f.Id,
+                Question = f.Question
+            }).ToListAsync();
+
+            return result;
         }
 
         public Task<IEnumerable<FaqViewModel>> GetAllFaqsAsync<T>()

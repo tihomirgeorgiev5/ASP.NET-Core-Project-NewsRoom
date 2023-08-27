@@ -89,14 +89,20 @@ namespace NewsRoom.Services.About
             return result;
         }
 
-        public Task<IEnumerable<FaqViewModel>> GetAllFaqsAsync<T>()
+        public async Task<FaqViewModel> GetByIdAsync<T>(int faqId)
         {
-            throw new NotImplementedException();
-        }
+            var faqModel = _newsRoomDbContext
+                .Faqs
+                .Where(f => f.Id == faqId)
+                .Select(x => new FaqViewModel()
+                {
+                    Answer = x.Answer,
+                    FaqId = x.Id,
+                    Question = x.Question
+                })
+                .FirstOrDefault();
 
-        public Task<FaqViewModel> GetByIdAsync<T>(int faqId)
-        {
-            throw new NotImplementedException();
+            return faqModel;
         }
     }
 }

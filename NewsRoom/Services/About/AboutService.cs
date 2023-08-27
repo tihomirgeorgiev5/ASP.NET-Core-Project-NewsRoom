@@ -1,12 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NewsRoom.Areas.Admin.Models;
 using NewsRoom.Data;
+using NewsRoom.Infrastructure.Data.Common.Models;
 using NewsRoom.Infrastructure.Data.Repositories;
 using NewsRoom.Models.FaqEntity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FaqEntity = NewsRoom.Data.Models.FaqEntity;
 
 namespace NewsRoom.Services.About
 {

@@ -69,6 +69,7 @@ namespace NewsRoom.Services.About
                 throw new ArgumentException(string.Format(MessageConstants.Faq.FaqNotFound, model.FaqId));
             }
 
+            
             faq.Answer = model.Answer;
             faq.Question = model.Question;
             faq.ModifiedOn = DateTime.UtcNow;

@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using NewsRoom.Controllers;
 using NewsRoom.Data;
 using NewsRoom.Data.Models;
+using NewsRoom.Infrastructure.Data.Repositories;
 using NewsRoom.Infrastructure.Extensions;
 using NewsRoom.Services.About;
 using NewsRoom.Services.Journalists;
@@ -77,10 +78,13 @@ namespace NewsRoom
                 })
                 .AddMvcLocalization(LanguageViewLocationExpanderFormat.Suffix);
 
+            services.AddScoped<IAppRepository, AppRepository>();
+            // Application services
             services.AddTransient<IStatisticsService, StatisticsService>();
             services.AddTransient<INewsService, NewsService>();
             services.AddTransient<IJournalistService, JournalistService>();
             services.AddTransient<IAboutService, AboutService>();
+            
             
         }
 

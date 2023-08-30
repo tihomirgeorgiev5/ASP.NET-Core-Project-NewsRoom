@@ -1,0 +1,36 @@
+﻿@model IEnumerable<FaqViewModel>
+@using NewsRoom.Models.FaqEntity
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer localizer
+@{
+    ViewData["Title"] = localizer["PageTitle"];
+}
+
+<div class="container">
+    <div class="row">
+        <div class="text-danger">
+            Art Gallery is where you will be able to book exhibitions events thta present arts to modern artist.
+            You will be able to buy uniques paintings and visits our Gallery to see arts from different genres like:
+            Portrait, Wildlife and Life Drawing.
+        </div>
+        <div class="col-8">
+            @foreach(var faq in Model)
+            {
+                <div class="card card-primary card-outline">
+                    <a class="d-block w-100" data-toggle="collapse" href="#collapseOne" aria-expanded="true">
+                        <div class="card-header">
+                            <h4 class="card-title w-100">
+                                @faq.FaqId. @faq.Question
+                            </h4>
+                        </div>
+                    </a>
+                    <div id="collapseOne" class="collapse show" data-parent="#accordion" style="">
+                        <div class="card-body">
+                            @faq.Answer
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

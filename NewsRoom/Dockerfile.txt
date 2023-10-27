@@ -1,0 +1,23 @@
+# base image
+FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
+WORKDIR /app
+EXPOSE 5000
+
+# build
+FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
+WORKDIR /src
+COPY ["ASP.NET-Core-Project-NewsRoom/ASP.NET-Core-Project-NewsRoom", "ASP.NET-Core-Project-NewsRoom/"]
+RUN dotnet restore "ASP.NET-Core-Project-NewsRoom/ASP.NET-Core-Project-NewsRoom.csproj"
+COPY . .
+WORKDIR "/src/ASP.NET-Core-Project-NewsRoom"
+RUN dotnet build "ASP.NET-Core-Project-NewsRoom.csproj" -c Release -o /app
+
+# publish
+FROM build AS publish
+RUN dotnet publish "ASP.NET-Core-Project-NewsRoom.csproj" -c Release -o /app
+
+# final stage/image
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app .
+ENTRYPOINT ["dotnet", "ASP.NET-Core-Project-NewsRoom.dll"]

@@ -1,3 +1,5 @@
+using Google.Cloud.Diagnostics.AspNet;
+using Google.Cloud.Diagnostics.AspNetCore3;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -18,6 +20,7 @@ using NewsRoom.Services.Journalists;
 using NewsRoom.Services.News;
 using NewsRoom.Services.Statistics;
 using System.Globalization;
+using System.Web.Http;
 
 namespace NewsRoom
 {
@@ -29,8 +32,29 @@ namespace NewsRoom
 
         public IConfiguration Configuration { get; }
 
+        private static void Register(HttpConfiguration config)
+        {
+            // Add a catch all for the uncaught exceptions.
+            // Replace ProjectId with your Google Cloud Project ID.
+            // Replace Service with a name or identifier for the service.
+            // Replace Version with a version for the service.
+            config.Services.Add(typeof(System.Web.Http.ExceptionHandling.IExceptionLogger),
+                ErrorReportingExceptionLogger.Create("valiant-healer-403410", "My First Project", "772578124567"));
+
+            // Web API routes
+            config.MapHttpAttributeRoutes();
+
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{action}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+                );
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
+            services
+                .AddGoogleDiagnosticsForAspNetCore("valiant-healer-403410", "My First Project", "772578124567");
 
             services
                 .AddDbContext<NewsRoomDbContext>(options =>
@@ -129,5 +153,6 @@ namespace NewsRoom
           
 
         }
+
     }
 }

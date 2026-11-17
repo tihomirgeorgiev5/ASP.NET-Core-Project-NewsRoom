@@ -93,7 +93,6 @@ namespace NewsRoom.Data
 
             builder
                 .Entity<FaqEntity>()
-                .HasNoKey()
                 .HasData(SeedUserData<FaqEntity>(@"DataSeed/faqs.json"));
                 
                 

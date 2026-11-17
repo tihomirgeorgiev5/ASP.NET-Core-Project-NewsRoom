@@ -53,8 +53,17 @@ namespace NewsRoom
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services
-                .AddGoogleDiagnosticsForAspNetCore("valiant-healer-403410", "My First Project", "772578124567");
+            var googleProjectId = this.Configuration["GoogleCloud:ProjectId"];
+
+            if (!string.IsNullOrWhiteSpace(googleProjectId))
+            {
+                services.AddGoogleDiagnosticsForAspNetCore(
+                    googleProjectId,
+                    this.Configuration["GoogleCloud:ServiceName"],
+                    this.Configuration["GoogleCloud:Version"]);
+            }
+            //services
+            // .AddGoogleDiagnosticsForAspNetCore("valiant-healer-403410", "My First Project", "772578124567");
 
             services
                 .AddDbContext<NewsRoomDbContext>(options =>

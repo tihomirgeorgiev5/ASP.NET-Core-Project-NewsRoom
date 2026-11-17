@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
@@ -7,17 +6,17 @@ namespace NewsRoom
     public class Program
     {
         public static void Main(string[] args)
-            => CreateWebHostBuilder(args)
-              .Build()
-              .Run();
+            => CreateHostBuilder(args)
+                .Build()
+                .Run();
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) 
-             => WebHost
+        public static IHostBuilder CreateHostBuilder(string[] args)
+            => Host
                 .CreateDefaultBuilder(args)
-                .UseUrls("http://*:80") // listen on port 80
-               // .ConfigureWebHostDefaults(webBuilder 
-               // => webBuilder
-                .UseStartup<Startup>();
-                
+                .ConfigureWebHostDefaults(webBuilder => webBuilder
+                    .UseUrls("http://*:80") // listen on port 80
+                    .UseStartup<Startup>());
     }
 }
+    
+
